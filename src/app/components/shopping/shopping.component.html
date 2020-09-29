@@ -1,0 +1,13 @@
+<div>
+    <p>Listes de courses</p>
+
+    <div>
+        <div *ngFor="let shoppingList of shoppingLists">
+            <div (click)="onClickSetSelectedShoppingList(shoppingList.id)">{{ shoppingList.name }}</div>
+        </div>
+
+    </div>
+    
+</div>
+
+
