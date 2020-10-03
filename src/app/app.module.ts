@@ -1,20 +1,23 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { HttpClientModule } from '@angular/common/http';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ShoppingComponent } from './components/shopping/shopping.component';
-import { ListOfShoppingListsComponent } from './components/shopping/list-of-shopping-lists/list-of-shopping-lists.component';
+import { ListOfListsOfProductComponent } from './components/shopping/list-of-lists-of-product/list-of-lists-of-product.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ShoppingComponent,
-    ListOfShoppingListsComponent
+    ListOfListsOfProductComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
