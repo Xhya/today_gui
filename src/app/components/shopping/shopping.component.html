@@ -1,10 +1,17 @@
-<div>
-    <p>Listes de courses</p>
+<div class="app-shopping">
+    <div class="title-container">
+        <p>Today</p>
+        <p>is a new day !</p>
+    </div>
 
-    <div>
+    <div class="app-list-of-lists-of-product-container">
         <app-list-of-lists-of-product></app-list-of-lists-of-product>
     </div>
-    
+
+    <button 
+        class="plus-button"
+        (click)="onClickCreateListOfProduct()"
+    >
+        +
+    </button>
 </div>
-
-

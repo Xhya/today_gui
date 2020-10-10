@@ -1,8 +1,9 @@
-<div (click)="onClickCreateListOfProduct()">Créer</div>
-
-<div>
-    <div *ngFor="let listOfProduct of listOfListsOfProduct">
-        {{ listOfProduct.name }}
+<div class="app-list-of-lists-of-product">
+  
+    <div>
+        <div *ngFor="let listOfProduct of listOfProduct$ | async">
+            {{ listOfProduct.name }}
+        </div> 
+        
     </div>
-
 </div>

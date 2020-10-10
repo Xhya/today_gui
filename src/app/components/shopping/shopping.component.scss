@@ -1,0 +1,20 @@
+$TITLE_HEIGHT: 120px;
+
+.app-shopping {
+    flex-direction: column;
+
+    .title-container {
+        flex-direction: column;
+        border-bottom: solid 1px #dedede;
+        height: $TITLE_HEIGHT;
+        padding-left: 10px;
+    }
+
+    .app-list-of-lists-of-product-container {
+        height: calc(100% - 120px);
+    }
+
+    .plus-button {
+        margin-bottom: 10px;
+    }
+}

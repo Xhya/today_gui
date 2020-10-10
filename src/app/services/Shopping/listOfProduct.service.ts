@@ -9,7 +9,8 @@ export class ListOfProductService {
     constructor(private http: RestService) {}
 
     public create(body: {
-        name: string
+        name: string,
+        userId: string
     }): Observable<any> {
         return this.http.post('list-of-product/create', body);
     }
