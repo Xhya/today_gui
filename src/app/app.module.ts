@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
 import userReducer from './ngrx/reducers/user.reducer';
 import shoppingDataReducer from './ngrx/reducers/Shopping/data.reducer';
+import shoppingNavigationReducer from './ngrx/reducers/Shopping/navigation.reducer';
 
 import { HttpClientModule } from '@angular/common/http';
 
@@ -24,7 +25,7 @@ import { ListOfProductComponent } from './components/shopping/list-of-product/li
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    StoreModule.forRoot({ user: userReducer, shoppingData: shoppingDataReducer }),
+    StoreModule.forRoot({ user: userReducer, shoppingData: shoppingDataReducer, shoppingNavigation: shoppingNavigationReducer }),
   ],
   providers: [],
   bootstrap: [AppComponent]
