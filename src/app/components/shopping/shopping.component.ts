@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import { ListOfProductService } from 'src/app/services/Shopping/listOfProduct.service';
 
-import { addListOfProduct } from 'src/app/ngrx/actions/listOfProduct.action';
+import { addListOfProduct } from 'src/app/ngrx/actions/Shopping/data.action';
 import { UserI } from 'src/app/_types/user';
 
 @Component({
@@ -34,7 +34,6 @@ export class ShoppingComponent implements OnInit {
 
     async onClickCreateListOfProduct() {
       const response = await this.listOfProductService.create({ name: 'toto', userId: this.currentUser.id }).toPromise();
-      console.log(':: -> newListOfProduct', response.body);
       this.store.dispatch(addListOfProduct({ listOfProduct: response.body }));
       
     }

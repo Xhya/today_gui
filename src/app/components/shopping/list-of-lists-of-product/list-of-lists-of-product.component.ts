@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { setListOfProduct } from 'src/app/ngrx/actions/listOfProduct.action';
+import { setListOfProduct } from 'src/app/ngrx/actions/Shopping/data.action';
 
 import { ListOfProductService } from 'src/app/services/Shopping/listOfProduct.service';
 import { ListOfProductI } from 'src/app/_types/listOfProduct';
@@ -21,10 +21,10 @@ export class ListOfListsOfProductComponent implements OnInit {
 
   constructor(
     private readonly listOfProductService: ListOfProductService,
-    private store: Store<{ user: UserI; listOfProduct: any }>,
+    private store: Store<{ user: UserI; shoppingData: any }>,
   ) {
     this.user$ = store.select('user');
-    this.listOfProduct$ = store.select(state => state.listOfProduct.listOfProduct);
+    this.listOfProduct$ = store.select(state => state.shoppingData.listOfProduct);
    }
 
   ngOnInit(): void {

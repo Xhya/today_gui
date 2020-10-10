@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import * as ListOrProductAction from '../actions/listOfProduct.action';
+import * as ShoppingDataAction from '../../actions/Shopping/data.action';
 
 export const initialState = {
     listOfProduct: [],
@@ -7,10 +7,10 @@ export const initialState = {
 
 const _reducer = createReducer(
     initialState,
-    on(ListOrProductAction.addListOfProduct, (state, { listOfProduct }) => ({
+    on(ShoppingDataAction.addListOfProduct, (state, { listOfProduct }) => ({
         listOfProduct: [...state.listOfProduct, listOfProduct],
     })),
-    on(ListOrProductAction.setListOfProduct, (state, { listOfProduct }) => ({
+    on(ShoppingDataAction.setListOfProduct, (state, { listOfProduct }) => ({
         listOfProduct: listOfProduct,
     })),
 );

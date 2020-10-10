@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { StoreModule } from '@ngrx/store';
 import userReducer from './ngrx/reducers/user.reducer';
-import listOfProductReducer from './ngrx/reducers/listOfProduct.reducer';
+import shoppingDataReducer from './ngrx/reducers/Shopping/data.reducer';
 
 import { HttpClientModule } from '@angular/common/http';
 
@@ -24,7 +24,7 @@ import { ListOfProductComponent } from './components/shopping/list-of-product/li
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    StoreModule.forRoot({ user: userReducer, listOfProduct: listOfProductReducer }),
+    StoreModule.forRoot({ user: userReducer, shoppingData: shoppingDataReducer }),
   ],
   providers: [],
   bootstrap: [AppComponent]
