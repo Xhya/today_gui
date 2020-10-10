@@ -2,16 +2,23 @@ import { createReducer, on } from '@ngrx/store';
 import * as ShoppingDataAction from '../../actions/Shopping/data.action';
 
 export const initialState = {
-    listOfProduct: [],
+    listOfListOfProduct: [],
+    currentListOfProduct: null
 };
 
 const _reducer = createReducer(
     initialState,
     on(ShoppingDataAction.addListOfProduct, (state, { listOfProduct }) => ({
-        listOfProduct: [...state.listOfProduct, listOfProduct],
+        listOfListOfProduct: [...state.listOfListOfProduct, listOfProduct],
+        currentListOfProduct: state.currentListOfProduct,
     })),
-    on(ShoppingDataAction.setListOfProduct, (state, { listOfProduct }) => ({
-        listOfProduct: listOfProduct,
+    on(ShoppingDataAction.setListOfProduct, (state, { listOfListOfProduct }) => ({
+        listOfListOfProduct: listOfListOfProduct,
+        currentListOfProduct: state.currentListOfProduct,
+    })),
+    on(ShoppingDataAction.setCurrentListOfProduct, (state, { currentListOfProduct }) => ({
+        listOfListOfProduct: state.listOfListOfProduct,
+        currentListOfProduct: currentListOfProduct,
     })),
 );
 

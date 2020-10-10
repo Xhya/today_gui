@@ -1,17 +1,25 @@
 <div class="app-shopping">
-    <div class="title-container">
+    <div class="title-container" *ngIf="(shoppingNavigation$ | async) === SHOPPING_PAGE_NAMES.LISTS_OF_LIST">
         <p>Today</p>
         <p>is a new day !</p>
     </div>
 
-    <div class="app-list-of-lists-of-product-container">
-        <app-list-of-lists-of-product></app-list-of-lists-of-product>
+    <div *ngIf="(shoppingNavigation$ | async) === SHOPPING_PAGE_NAMES.LISTS_OF_LIST">
+
+        <div class="app-list-of-lists-of-product-container">
+            <app-list-of-lists-of-product></app-list-of-lists-of-product>
+        </div>
+        
+        <button 
+            class="plus-button"
+            (click)="onClickCreateListOfProduct()"
+        >
+            +
+        </button>
     </div>
 
-    <button 
-        class="plus-button"
-        (click)="onClickCreateListOfProduct()"
-    >
-        +
-    </button>
+    <div class="app-list-of-product-container" *ngIf="(shoppingNavigation$ | async) === SHOPPING_PAGE_NAMES.LIST_OF_PRODUCT">
+        <app-list-of-product class="app-list-of-product"></app-list-of-product>
+    </div>
+
 </div>

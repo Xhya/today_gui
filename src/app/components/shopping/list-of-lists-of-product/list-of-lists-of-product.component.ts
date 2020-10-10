@@ -15,7 +15,7 @@ import { UserI } from 'src/app/_types/user';
   
 export class ListOfListsOfProductComponent implements OnInit {
   user$: Observable<UserI>
-  listOfProduct$: Observable<ListOfProductI[]>
+  listOfListOfProduct$: Observable<ListOfProductI[]>
   
   currentUser: UserI;
 
@@ -24,7 +24,7 @@ export class ListOfListsOfProductComponent implements OnInit {
     private store: Store<{ user: UserI; shoppingData: any }>,
   ) {
     this.user$ = store.select('user');
-    this.listOfProduct$ = store.select(state => state.shoppingData.listOfProduct);
+    this.listOfListOfProduct$ = store.select(state => state.shoppingData.listOfListOfProduct);
    }
 
   ngOnInit(): void {
@@ -36,15 +36,12 @@ export class ListOfListsOfProductComponent implements OnInit {
       this.currentUser = r['user'];
       this.initListOfProduct();
     });
-    this.listOfProduct$.subscribe(r => {
-      console.log('::  r', r);
-    });
   }
 
   initListOfProduct() {
     if (this.currentUser) {
       this.listOfProductService.getByUserId({ userId: this.currentUser.id }).subscribe(r => {
-        this.store.dispatch(setListOfProduct({ listOfProduct: r.body }));
+        this.store.dispatch(setListOfProduct({ listOfListOfProduct: r.body }));
       });
     }
   }

@@ -12,10 +12,10 @@ const _reducer = createReducer(
     on(NavigationAction.setPage, (state, { pageName }) => ({
         pageName: pageName,
     })),
-    on(NavigationAction.setPageToListOfLists, (state, { pageName }) => ({
+    on(NavigationAction.setPageToListOfLists, () => ({
         pageName: SHOPPING_PAGE_NAMES.LISTS_OF_LIST,
     })),
-    on(NavigationAction.setPageToListOfProduct, (state, { pageName }) => ({
+    on(NavigationAction.setPageToListOfProduct, () => ({
         pageName: SHOPPING_PAGE_NAMES.LIST_OF_PRODUCT,
     })),
 );

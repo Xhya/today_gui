@@ -1,1 +1,46 @@
-<p>list-of-product works!</p>
+<div class="app-list-of-product" *ngIf="(shoppingNavigation$ | async) === SHOPPING_PAGE_NAMES.LIST_OF_PRODUCT">
+
+    <div class="top-panel">
+        <button class="arrow-left-button" (click)="onClickGoBack()"> 
+            <
+        </button>
+
+        <div class="title-container">
+            <div class="title">Liste du marché</div>
+            <div class="shared-with">partagé avec</div>
+        </div>
+
+        <button class="ellipsis-button">
+            ...
+        </button>
+
+    </div>
+
+    <div>
+        <div>...</div>
+        <button>v</button>
+    </div>
+
+    <div>
+
+        <div>catégorie</div>
+        <div>
+
+            <div>5</div>
+            <div>Courgette</div>
+            <div>O</div>
+
+        </div>
+
+    </div>
+
+    <button 
+        class="plus-button"
+        (click)="onClickCrea()"
+    >
+        +
+    </button>
+
+
+</div>
+

@@ -1,0 +1,34 @@
+.app-list-of-product {
+    flex-direction: column;
+
+    .top-panel {
+        height: 90px;
+        justify-content: center;
+        align-items: center;
+
+        .title-container {
+            flex-direction: column;
+            justify-content: center;
+
+            .title, 
+            .shared-with {
+                justify-content: center;
+                align-items: center;
+            }
+        }
+
+        .arrow-left-button {
+            margin-left: 10px;
+        }
+
+        .ellipsis-button {
+            margin-right: 10px;
+        }
+
+    }
+
+    .plus-button {
+        margin-bottom: 10px;
+    }
+    
+}
