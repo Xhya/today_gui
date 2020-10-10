@@ -11,4 +11,10 @@ export class UserService {
     public createEmptyUser(): Observable<any> {
         return this.http.post('user/create-empty');
     }
+
+    public getUserById(body: {
+        userId: string
+    }): Observable<any> {
+        return this.http.get('user/get-by-id');
+    }
 }
