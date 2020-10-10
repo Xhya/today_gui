@@ -16,9 +16,13 @@
 
     </div>
 
-    <div>
-        <div>...</div>
-        <button>v</button>
+    <div class="search-container" *ngIf="isSearchActive">
+        <div class="text-container">
+            <div class="text">
+                <input value="..."/>
+            </div>
+            <button class="check-button">v</button>
+        </div>
     </div>
 
     <div>
@@ -36,7 +40,7 @@
 
     <button 
         class="plus-button"
-        (click)="onClickCrea()"
+        (click)="onClickPlusButton()"
     >
         +
     </button>

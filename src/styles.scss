@@ -20,6 +20,17 @@ button {
     outline: none;
 }
 
+input {
+    box-sizing: border-box;
+    border: none;
+    width: 100%;
+    height: 100%;
+}
+
+textarea:focus, input:focus{
+    outline: none;
+}
+
 
 .plus-button {
     position: fixed;

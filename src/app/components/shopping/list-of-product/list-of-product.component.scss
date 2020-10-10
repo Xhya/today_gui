@@ -10,7 +10,7 @@
             flex-direction: column;
             justify-content: center;
 
-            .title, 
+            .title,
             .shared-with {
                 justify-content: center;
                 align-items: center;
@@ -24,11 +24,35 @@
         .ellipsis-button {
             margin-right: 10px;
         }
+    }
 
+    .search-container {
+        height: 40px;
+
+        .text-container {
+            flex-direction: row;
+            margin: 0 5% 0 3%;
+            align-items: center;
+
+            .text {
+
+                input {
+                    margin-right: 3%;
+                    border-radius: 100px;
+                    padding-left: 10px;
+                    border: solid 1px grey;
+                }
+            }
+        }
+
+        .check-button {
+            border-radius: 100%;
+            padding: 6px 11px;
+            height: fit-content;
+        }
     }
 
     .plus-button {
         margin-bottom: 10px;
     }
-    
 }

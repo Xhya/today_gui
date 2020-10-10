@@ -14,6 +14,8 @@ export class ListOfProductComponent implements OnInit {
   SHOPPING_PAGE_NAMES = SHOPPING_PAGE_NAMES;
   shoppingNavigation$: Observable<any>;
 
+  isSearchActive: boolean = false;
+
   constructor(
     private store: Store<{ user, shoppingNavigation }>
   ) { 
@@ -25,6 +27,10 @@ export class ListOfProductComponent implements OnInit {
 
   onClickGoBack() {
     this.store.dispatch(setPageToListOfLists());
+  }
+
+  onClickPlusButton() {
+    this.isSearchActive = !this.isSearchActive;
   }
 
 }
