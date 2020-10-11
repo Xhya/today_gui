@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import { ListOfProductService } from 'src/app/services/Shopping/listOfProduct.service';
 
-import { addListOfProduct } from 'src/app/ngrx/actions/Shopping/data.action';
+import { addListOfProduct, setCurrentListOfProduct } from 'src/app/ngrx/actions/Shopping/data.action';
 import { UserI } from 'src/app/_types/user';
 import { setPageToListOfProduct } from 'src/app/ngrx/actions/Shopping/navigation.action';
 
@@ -44,5 +44,6 @@ export class ShoppingComponent implements OnInit {
       const response = await this.listOfProductService.create({ name: 'toto', userId: this.currentUser.id }).toPromise();
       this.store.dispatch(addListOfProduct({ listOfProduct: response.body }));
       this.store.dispatch(setPageToListOfProduct());
+      this.store.dispatch(setCurrentListOfProduct({ currentListOfProduct: response.body }));
     }
 }

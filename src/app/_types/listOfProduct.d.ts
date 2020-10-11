@@ -3,7 +3,7 @@ import { UserI } from './user';
 interface ListOfProductI {
     id: string;
     name: string;
-    products: any[]; // TODO: change
+    products: ProductI[];
     owner: UserI;
     note: string;
     creationDate: string;

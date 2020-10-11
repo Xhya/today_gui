@@ -3,7 +3,7 @@ import * as ShoppingDataAction from '../../actions/Shopping/data.action';
 
 export const initialState = {
     listOfListOfProduct: [],
-    currentListOfProduct: null
+    currentListOfProduct: null,
 };
 
 const _reducer = createReducer(
@@ -19,6 +19,13 @@ const _reducer = createReducer(
     on(ShoppingDataAction.setCurrentListOfProduct, (state, { currentListOfProduct }) => ({
         listOfListOfProduct: state.listOfListOfProduct,
         currentListOfProduct: currentListOfProduct,
+    })),
+    on(ShoppingDataAction.addProductsInCurrentListOfProduct, (state, { product }) => ({
+        listOfListOfProduct: state.listOfListOfProduct,
+        currentListOfProduct: {
+            ...state.currentListOfProduct,
+            products: [...state.currentListOfProduct.products, product],
+        },
     })),
 );
 

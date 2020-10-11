@@ -20,4 +20,12 @@ export class ListOfProductService {
     }): Observable<any> {
         return this.http.get('list-of-product/by-user-id', body);
     }
+
+    public addProductToListOfProduct(body: {
+        product: ProductI,
+        listOfProductId: string,
+        userId: string
+    }): Observable<any> {
+        return this.http.post('list-of-product/add-product-to-list', body);
+    }
 }

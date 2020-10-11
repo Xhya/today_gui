@@ -1,4 +1,4 @@
-<div class="app-list-of-product" *ngIf="(shoppingNavigation$ | async) === SHOPPING_PAGE_NAMES.LIST_OF_PRODUCT">
+<div class="app-list-of-product" *ngIf="(pageName$ | async) === SHOPPING_PAGE_NAMES.LIST_OF_PRODUCT">
 
     <div class="top-panel">
         <button class="arrow-left-button" (click)="onClickGoBack()"> 
@@ -42,15 +42,18 @@
 
     <div>
 
-        <div>
+        <div *ngFor="let listOfProduct of (currentListOfProduct$ | async).products">
 
-            <div>product</div>
             <div>
 
-                <div>5</div>
-                <div>Courgette</div>
-                <div>O</div>
+                <div>
+                    <div>{{ listOfProduct.name }}</div>
+                    <div>{{ listOfProduct.quantity }}</div>
+                    
+                </div>
 
+                <div>O</div>
+            
             </div>
 
         </div>

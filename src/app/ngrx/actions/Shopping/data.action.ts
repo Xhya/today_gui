@@ -5,3 +5,4 @@ export const setListOfProduct = createAction('[Shopping Data Component] setListO
 export const addListOfProduct = createAction('[Shopping Data Component] addListOfProduct',  props<{listOfProduct: ListOfProductI}>());
 
 export const setCurrentListOfProduct = createAction('[Shopping Data Component] setCurrentListOfProduct', props<{ currentListOfProduct: ListOfProductI }>());
+export const addProductsInCurrentListOfProduct = createAction('[Shopping Data Component] addProductsInCurrentListOfProduct', props<{ product: ProductI }>());
