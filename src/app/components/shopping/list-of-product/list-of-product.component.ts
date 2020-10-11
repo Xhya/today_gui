@@ -24,9 +24,10 @@ export class ListOfProductComponent implements OnInit {
 
   isSearchActive: boolean;
   searchedProductText: string;
-  foundListOfProduct: ProductI[];
+  foundProducts: ProductI[];
   currentListOfProduct: ListOfProductI;
   currentUser: UserI;
+  formatedDisplayedListOfProductWithCategories: object;
 
   constructor(
     private store: Store<{ shoppingNavigation, shoppingData, user }>,
@@ -40,7 +41,8 @@ export class ListOfProductComponent implements OnInit {
 
     this.searchedProductText = ""
     this.isSearchActive = false;
-    this.foundListOfProduct = [];
+    this.foundProducts = [];
+    this.formatedDisplayedListOfProductWithCategories = {};
   }
 
   ngOnInit(): void {
@@ -50,10 +52,29 @@ export class ListOfProductComponent implements OnInit {
   initStore() {
     this.currentListOfProduct$.subscribe(r => {
       this.currentListOfProduct = r;
+      this.updateFormatedListOfProductWithCategories();
     });
     this.user$.subscribe(r => {
       this.currentUser = r;
     });  
+  }
+
+  updateFormatedListOfProductWithCategories() {
+    const sortedProducts = [...this.currentListOfProduct.products ].sort((a, b) => a.product.category.name < b.product.category.name ? -1 : 1);
+
+    this.formatedDisplayedListOfProductWithCategories = {};
+    
+    for (const productOfList of sortedProducts) {
+
+      let category = this.formatedDisplayedListOfProductWithCategories[productOfList.product.category.name]; 
+
+      if (!category) {
+        this.formatedDisplayedListOfProductWithCategories[productOfList.product.category.name] = [];
+      }
+
+      this.formatedDisplayedListOfProductWithCategories[productOfList.product.category.name] = [...this.formatedDisplayedListOfProductWithCategories[productOfList.product.category.name], productOfList];
+
+    }
   }
 
   onClickGoBack() {
@@ -67,19 +88,20 @@ export class ListOfProductComponent implements OnInit {
 
   onChangeSearchedProductText() {
     if (this.searchedProductText === "") {
-      this.foundListOfProduct = [];
+      this.foundProducts = [];
       return;
     }
 
     this.productService.getProductsByName({
       searchedText: this.searchedProductText
     }).subscribe(r => {
-      this.foundListOfProduct = r.body;
+      this.foundProducts = r.body;
     });
   }
 
   onClickFoundProduct(product: ProductI) {
-    this.isSearchActive = false;
+    this.searchedProductText = "";
+    this.onChangeSearchedProductText();
 
     this.listOfProductService.addProductToListOfProduct({
       product: product,

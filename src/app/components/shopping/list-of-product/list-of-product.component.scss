@@ -77,6 +77,19 @@
         }
     }
 
+    .list-of-product-of-list-container {
+        flex-direction: column;
+
+        .product-of-list-container {
+            height: fit-content;
+        }
+
+        .ng-for-category-container {
+            flex-direction: column;
+        }
+
+    }
+
     .plus-button {
         margin-bottom: 10px;
 
