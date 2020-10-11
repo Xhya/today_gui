@@ -59,7 +59,9 @@
         class="plus-button"
         (click)="onClickPlusButton()"
     >
-        +
+        <div [ngClass]="{'rotated': isSearchActive }">
+            +
+        </div>
     </button>
 
 

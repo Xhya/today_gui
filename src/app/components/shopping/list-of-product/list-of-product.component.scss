@@ -55,6 +55,7 @@
 
         .relative-position-of-list-of-product {
             position: relative;
+            top: 5px;
 
             .list-of-product-container {
                 flex-direction: column;
@@ -72,5 +73,9 @@
 
     .plus-button {
         margin-bottom: 10px;
+
+        .rotated {
+            transform: rotate(45deg);
+        }
     }
 }
