@@ -2,7 +2,9 @@
   
     <div>
         <div *ngFor="let listOfProduct of listOfListOfProduct$ | async">
-            {{ listOfProduct.name }}
+            <div (click)="onClickListOfProduct(listOfProduct)">
+                {{ listOfProduct.name }}
+            </div>
         </div> 
         
     </div>

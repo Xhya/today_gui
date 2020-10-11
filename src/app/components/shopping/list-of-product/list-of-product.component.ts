@@ -78,6 +78,7 @@ export class ListOfProductComponent implements OnInit {
   }
 
   onClickGoBack() {
+    this.store.dispatch(setCurrentListOfProduct({ currentListOfProduct: null }))
     this.store.dispatch(setPageToListOfLists());
   }
 

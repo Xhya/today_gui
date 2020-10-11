@@ -54,4 +54,9 @@ export class ListOfListsOfProductComponent implements OnInit {
     this.store.dispatch(setCurrentListOfProduct({ currentListOfProduct: response.body }));
   }
 
+  onClickListOfProduct(listOfProduct: ListOfProductI) {
+    this.store.dispatch(setPageToListOfProduct());
+    this.store.dispatch(setCurrentListOfProduct({ currentListOfProduct: listOfProduct }));
+  }
+
 }
