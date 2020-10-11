@@ -10,12 +10,6 @@
             <app-list-of-lists-of-product></app-list-of-lists-of-product>
         </div>
         
-        <button 
-            class="plus-button"
-            (click)="onClickCreateListOfProduct()"
-        >
-            +
-        </button>
     </div>
 
     <div class="app-list-of-product-container" *ngIf="(shoppingNavigation$ | async) === SHOPPING_PAGE_NAMES.LIST_OF_PRODUCT">

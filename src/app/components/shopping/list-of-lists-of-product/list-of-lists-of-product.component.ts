@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { setListOfProduct } from 'src/app/ngrx/actions/Shopping/data.action';
+import { addListOfProduct, setCurrentListOfProduct, setListOfProduct } from 'src/app/ngrx/actions/Shopping/data.action';
+import { setPageToListOfProduct } from 'src/app/ngrx/actions/Shopping/navigation.action';
 
 import { ListOfProductService } from 'src/app/services/Shopping/listOfProduct.service';
 import { ListOfProductI } from 'src/app/_types/listOfProduct';
@@ -46,9 +47,11 @@ export class ListOfListsOfProductComponent implements OnInit {
     }
   }
 
-  // async onClickCreateListOfProduct() {
-  //   await this.listOfProductService.create({ name: "toto", userId: this.currentUser.id }).toPromise();
-  //   this.initListOfProduct();
-  // }
+  async onClickCreateListOfProduct() {
+    const response = await this.listOfProductService.create({ name: 'toto', userId: this.currentUser.id }).toPromise();
+    this.store.dispatch(addListOfProduct({ listOfProduct: response.body }));
+    this.store.dispatch(setPageToListOfProduct());
+    this.store.dispatch(setCurrentListOfProduct({ currentListOfProduct: response.body }));
+  }
 
 }

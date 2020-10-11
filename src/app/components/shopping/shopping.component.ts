@@ -4,9 +4,7 @@ import { Observable } from 'rxjs';
 
 import { ListOfProductService } from 'src/app/services/Shopping/listOfProduct.service';
 
-import { addListOfProduct, setCurrentListOfProduct } from 'src/app/ngrx/actions/Shopping/data.action';
 import { UserI } from 'src/app/_types/user';
-import { setPageToListOfProduct } from 'src/app/ngrx/actions/Shopping/navigation.action';
 
 import { SHOPPING_PAGE_NAMES } from '../../helpers/navigation.helper';
 @Component({
@@ -38,12 +36,5 @@ export class ShoppingComponent implements OnInit {
       this.user$.subscribe((r) => {
         this.currentUser = r['user'];
       });
-    }
-
-    async onClickCreateListOfProduct() {
-      const response = await this.listOfProductService.create({ name: 'toto', userId: this.currentUser.id }).toPromise();
-      this.store.dispatch(addListOfProduct({ listOfProduct: response.body }));
-      this.store.dispatch(setPageToListOfProduct());
-      this.store.dispatch(setCurrentListOfProduct({ currentListOfProduct: response.body }));
     }
 }
