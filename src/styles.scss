@@ -1,5 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
+@import "./assets/scss/colors.scss";
+
 html, body {
     height: 100%;
     width: 100%;
@@ -49,3 +51,8 @@ textarea:focus, input:focus{
     color: white;
     cursor: pointer;
 }
+
+.border-top-right-radius {
+    border-top-right-radius: 50px;
+}
+ 

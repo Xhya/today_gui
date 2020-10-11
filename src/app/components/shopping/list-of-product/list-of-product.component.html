@@ -7,7 +7,7 @@
 
         <div class="title-container">
             <div class="title">Liste du marché</div>
-            <div class="shared-with">partagé avec</div>
+            <div class="shared-with">partagée avec</div>
         </div>
 
         <button class="ellipsis-button">
@@ -16,49 +16,65 @@
 
     </div>
 
-    <div class="search-container" *ngIf="isSearchActive">
-        <div class="text-container">
-            <div class="text">
-                <input 
-                    type="text"
-                    [(ngModel)]="searchedProductText"
-                    (ngModelChange)="onChangeSearchedProductText()"
-                    placeholder="..."
-                />
+    <div class="background-div">
+
+        <div 
+            *ngIf="isSearchActive"
+            class="search-container" 
+            [ngClass]="{ 'border-top-right-radius': isSearchActive } "
+        >
+            <div class="text-container">
+                <div class="text">
+                    <input 
+                        type="text"
+                        [(ngModel)]="searchedProductText"
+                        (ngModelChange)="onChangeSearchedProductText()"
+                        placeholder="..."
+                    />
+                </div>
+                <button class="check-button">v</button>
             </div>
-            <button class="check-button">v</button>
-        </div>
-        <div *ngIf="foundProducts.length > 0" class="relative-position-of-list-of-product">
-            <div class="list-of-product-container">
-                <div *ngFor="let product of foundProducts">
-                    <div class="product-container" (click)="onClickFoundProduct(product)">
-                        <div class="name">{{ product.name }}</div>
-                        <div class="category">{{ product.category.name }}</div>
+            <div *ngIf="foundProducts.length > 0" class="relative-position-of-list-of-product">
+                <div class="list-of-product-container">
+                    <div *ngFor="let product of foundProducts">
+                        <div class="product-container" (click)="onClickFoundProduct(product)">
+                            <p class="name">{{ product.name }}</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="list-of-product-of-list-container">
+        <div 
+            class="list-of-product-of-list-container"
+            [ngClass]="{ 'border-top-right-radius': !isSearchActive } "
+        >
 
-        <div *ngFor="let item of formatedDisplayedListOfProductWithCategories | keyvalue" class="product-of-list-container">
-            
-            <div class="ng-for-category-container">
-                <div>
-                    {{item.key}}
-                </div>
-
-                <div *ngFor="let product of item.value">
-                    <div>
-                        <div>{{product.name }}</div>
-                        <div>{{product.quantity }}</div>                  
+            <div *ngFor="let item of formatedDisplayedListOfProductWithCategories | keyvalue" class="product-of-list-container">
+                
+                <div class="ng-for-category-container">
+                    <div class="category-container">
+                        <div class="left-line"></div>
+                        <div class="category-text">
+                            {{item.key}}
+                        </div>
                     </div>
 
-                    <div>O</div>
+                    <div *ngFor="let product of item.value">
+
+                        <div class="ng-for-products">
+                            <div class="left">
+                                <div class="quantity">{{product.quantity }}</div>
+                                <div class="name">{{product.name }}</div>                  
+                            </div>
+
+                            <div class="right">O</div>
+                        </div>
+                    </div>
                 </div>
+                
             </div>
-            
+
         </div>
 
     </div>
