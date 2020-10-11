@@ -19,20 +19,37 @@
     <div class="search-container" *ngIf="isSearchActive">
         <div class="text-container">
             <div class="text">
-                <input value="..."/>
+                <input 
+                    type="text"
+                    [(ngModel)]="searchedProductText"
+                    (ngModelChange)="onChangeSearchedProductText()"
+                    placeholder="..."
+                />
             </div>
             <button class="check-button">v</button>
+        </div>
+        <div *ngIf="foundListOfProduct.length > 0" class="relative-position-of-list-of-product">
+            <div class="list-of-product-container">
+                <div *ngFor="let product of foundListOfProduct">
+                    <div>{{ product.name }}</div>
+                    <div>{{ product.category.name }}</div>
+                </div>
+            </div>
         </div>
     </div>
 
     <div>
 
-        <div>catégorie</div>
         <div>
 
-            <div>5</div>
-            <div>Courgette</div>
-            <div>O</div>
+            <div>product</div>
+            <div>
+
+                <div>5</div>
+                <div>Courgette</div>
+                <div>O</div>
+
+            </div>
 
         </div>
 
