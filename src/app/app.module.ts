@@ -7,6 +7,7 @@ import shoppingDataReducer from './ngrx/reducers/Shopping/data.reducer';
 import shoppingNavigationReducer from './ngrx/reducers/Shopping/navigation.reducer';
 
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,6 +27,8 @@ import { ListOfProductComponent } from './components/shopping/list-of-product/li
     AppRoutingModule,
     HttpClientModule,
     StoreModule.forRoot({ user: userReducer, shoppingData: shoppingDataReducer, shoppingNavigation: shoppingNavigationReducer }),
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
