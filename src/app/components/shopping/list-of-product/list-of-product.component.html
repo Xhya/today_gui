@@ -31,8 +31,10 @@
         <div *ngIf="foundListOfProduct.length > 0" class="relative-position-of-list-of-product">
             <div class="list-of-product-container">
                 <div *ngFor="let product of foundListOfProduct">
-                    <div>{{ product.name }}</div>
-                    <div>{{ product.category.name }}</div>
+                    <div class="product-container" (click)="onClickFoundProduct(product)">
+                        <div class="name">{{ product.name }}</div>
+                        <div class="category">{{ product.category.name }}</div>
+                    </div>
                 </div>
             </div>
         </div>
