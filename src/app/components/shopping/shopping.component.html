@@ -1,4 +1,4 @@
-<div class="app-shopping">
+<div class="app-shopping" *ngIf="getIsMobileScreen()">
     <div class="title-container" *ngIf="(shoppingNavigation$ | async) === SHOPPING_PAGE_NAMES.LISTS_OF_LIST">
         <p>Today</p>
         <p>is a new day !</p>

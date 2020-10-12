@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { getIsMobileScreen } from 'src/app/helpers/style.helper';
 
 import { ListOfProductService } from 'src/app/services/Shopping/listOfProduct.service';
 
@@ -14,7 +15,7 @@ import { SHOPPING_PAGE_NAMES } from '../../helpers/navigation.helper';
 })
 export class ShoppingComponent implements OnInit {
     SHOPPING_PAGE_NAMES = SHOPPING_PAGE_NAMES;
-    
+
     user$: Observable<any>;
     shoppingNavigation$: Observable<any>;
 
@@ -36,5 +37,9 @@ export class ShoppingComponent implements OnInit {
       this.user$.subscribe((r) => {
         this.currentUser = r['user'];
       });
+    }
+  
+    getIsMobileScreen() {
+      return getIsMobileScreen();
     }
 }
