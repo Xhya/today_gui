@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { SHOPPING_PAGE_NAMES } from 'src/app/helpers/navigation.helper';
-import { setCurrentListOfProduct } from 'src/app/ngrx/actions/Shopping/data.action';
+import { setCurrentListOfProduct, setNameOfCurrentListOfProduct } from 'src/app/ngrx/actions/Shopping/data.action';
 import { setPageToListOfLists } from 'src/app/ngrx/actions/Shopping/navigation.action';
 import { ListOfProductService } from 'src/app/services/Shopping/listOfProduct.service';
 import { ProductService } from 'src/app/services/Shopping/product.service';
@@ -16,6 +16,8 @@ import { UserI } from 'src/app/_types/user';
   styleUrls: ['./list-of-product.component.scss']
 })
 export class ListOfProductComponent implements OnInit {
+  @ViewChild("nameOflistOfProductInput", { static: false }) nameOflistOfProductInput: ElementRef;
+
   SHOPPING_PAGE_NAMES = SHOPPING_PAGE_NAMES;
 
   pageName$: Observable<any>;
@@ -47,11 +49,18 @@ export class ListOfProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.initStore();
+
   }
+
+    
+  ngAfterViewInit() {
+    this.nameOflistOfProductInput.nativeElement.focus();
+  }
+
 
   initStore() {
     this.currentListOfProduct$.subscribe(r => {
-      this.currentListOfProduct = r;
+      this.currentListOfProduct = { ...r };
       this.updateFormatedListOfProductWithCategories();
     });
     this.user$.subscribe(r => {
@@ -111,6 +120,21 @@ export class ListOfProductComponent implements OnInit {
     }).subscribe(r => {
       this.store.dispatch(setCurrentListOfProduct({ currentListOfProduct: r.body }));
     });
+  }
+
+  makeListOfProductNameFirstLettreUppercased(name: string) {
+    this.currentListOfProduct.name = name.charAt(0).toUpperCase();
+  }
+
+  onChangeCurrentListOfProductName($event) {
+    const listOfProductName = $event.target.value;
+
+    this.listOfProductService.setNameOfListOfProduct({
+      name: listOfProductName,
+      listOfProductId: this.currentListOfProduct.id
+    }).subscribe(r => {
+      this.store.dispatch(setNameOfCurrentListOfProduct({ name: listOfProductName }));
+    })
   }
 
 }

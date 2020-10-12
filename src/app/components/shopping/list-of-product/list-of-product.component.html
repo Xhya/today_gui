@@ -6,7 +6,15 @@
         </button>
 
         <div class="title-container">
-            <div class="title">Liste du marché</div>
+            <input 
+                #nameOflistOfProductInput
+                type="text"
+                class="title-input" 
+                placeholder="Entrez le nom de la liste"
+                [(ngModel)]="currentListOfProduct.name"
+                (ngModelChange)="makeListOfProductNameFirstLettreUppercased($event)"
+                (change)="onChangeCurrentListOfProductName($event)"
+            />
             <div class="shared-with">partagée avec</div>
         </div>
 
