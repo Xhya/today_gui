@@ -27,6 +27,13 @@ const _reducer = createReducer(
             products: [...state.currentListOfProduct.products, product],
         },
     })),
+    on(ShoppingDataAction.setNameOfCurrentListOfProduct, (state, { name }) => ({
+        listOfListOfProduct: state.listOfListOfProduct,
+        currentListOfProduct: {
+            ...state.currentListOfProduct,
+            name: name
+        },
+    })),
 );
 
 export default function reducer(state, action) {

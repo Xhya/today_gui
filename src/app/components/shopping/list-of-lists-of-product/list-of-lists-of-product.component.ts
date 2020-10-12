@@ -48,7 +48,7 @@ export class ListOfListsOfProductComponent implements OnInit {
   }
 
   async onClickCreateListOfProduct() {
-    const response = await this.listOfProductService.create({ name: 'toto', userId: this.currentUser.id }).toPromise();
+    const response = await this.listOfProductService.create({ userId: this.currentUser.id }).toPromise();
     this.store.dispatch(addListOfProduct({ listOfProduct: response.body }));
     this.store.dispatch(setPageToListOfProduct());
     this.store.dispatch(setCurrentListOfProduct({ currentListOfProduct: response.body }));
@@ -58,5 +58,4 @@ export class ListOfListsOfProductComponent implements OnInit {
     this.store.dispatch(setPageToListOfProduct());
     this.store.dispatch(setCurrentListOfProduct({ currentListOfProduct: listOfProduct }));
   }
-
 }
