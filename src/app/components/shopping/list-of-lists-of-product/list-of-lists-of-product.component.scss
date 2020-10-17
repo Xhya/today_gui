@@ -1,5 +1,40 @@
+@import '../../../../assets/scss/colors.scss';
+
 .app-list-of-lists-of-product {
+    margin-top: -30px;
+
     .plus-button {
         margin-bottom: 10px;
     }
+
+    .ng-for-container {
+        flex-wrap: wrap;
+        justify-content: space-between;
+        height: fit-content;
+
+        .ng-for {
+            width: 43%;
+            height: 60px;
+            background-color: $TODAY_COLOR_1;
+            color: white;
+            margin-top: 10px;
+
+            &:nth-child(2n+1) {
+                margin-left: 20px;
+            }
+
+            &:nth-child(2n) {
+                margin-right: 20px;
+            }
+
+            .item {
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                border-radius: 5px;
+            }
+
+        }
+    }
+
 }

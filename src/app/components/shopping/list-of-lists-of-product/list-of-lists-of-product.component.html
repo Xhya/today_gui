@@ -1,8 +1,8 @@
 <div class="app-list-of-lists-of-product">
   
-    <div>
-        <div *ngFor="let listOfProduct of (shoppingData$ | async).listOfListOfProduct">
-            <div (click)="onClickListOfProduct(listOfProduct)">
+    <div class="ng-for-container">
+        <div class="ng-for" *ngFor="let listOfProduct of (shoppingData$ | async).listOfListOfProduct">
+            <div class="item" (click)="onClickListOfProduct(listOfProduct)">
                 {{ listOfProduct.name }}
             </div>
         </div> 

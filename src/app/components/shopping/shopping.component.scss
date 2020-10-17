@@ -1,6 +1,6 @@
 @import "../../../assets/scss/colors.scss";
 
-$TITLE_HEIGHT: 210px;
+$TITLE_HEIGHT: 175px;
 
 .app-shopping {
     flex-direction: column;
@@ -9,6 +9,7 @@ $TITLE_HEIGHT: 210px;
         flex-direction: column;
         border-bottom: solid 1px #dedede;
         height: $TITLE_HEIGHT;
+        min-height: $TITLE_HEIGHT;;
         padding-left: 10px;
         background-color: $TODAY_COLOR_4;
 
@@ -26,13 +27,14 @@ $TITLE_HEIGHT: 210px;
             &:nth-child(3) {
                 text-align: center;
                 color: white;
-                margin: 20px 0;
+                margin-top: 20px;
             }
         }
     }
 
     .app-list-of-lists-of-product-container {
-        height: calc(100% - 120px);
+        height: calc(100% - $TITLE_HEIGHT);
+        width: 100%;
     }
 
     .app-list-of-product-container {

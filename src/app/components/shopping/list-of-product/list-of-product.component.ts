@@ -73,6 +73,9 @@ export class ListOfProductComponent implements OnInit {
   }
 
   onClickGoBack() {
+    if (this.currentListOfProduct.name === null) {
+      return;
+    }
     this.shoppingNavigationStore.setPageToListOfLists();
     this.shoppingDataStore.setCurrentListOfProduct({ currentListOfProduct: null });
   }
