@@ -54,14 +54,18 @@ export class ListOfProductComponent implements OnInit {
 
     
   ngAfterViewInit() {
-    this.nameOflistOfProductInput.nativeElement.focus();
+    if (!this.currentListOfProduct.name) {
+      this.nameOflistOfProductInput.nativeElement.focus();
+    }
   }
 
 
   initStore() {
     this.shoppingData$.subscribe(r => {
       this.currentListOfProduct = r.currentListOfProduct;
-      this.updateFormatedListOfProductWithCategories();
+      if (this.currentListOfProduct) {
+        this.updateFormatedListOfProductWithCategories();
+      }
     });
     this.user$.subscribe(r => {
       this.currentUser = r.user;
@@ -69,7 +73,7 @@ export class ListOfProductComponent implements OnInit {
   }
 
   onClickGoBack() {
-    this.shoppingNavigationStore.setPageToListOfProduct();
+    this.shoppingNavigationStore.setPageToListOfLists();
     this.shoppingDataStore.setCurrentListOfProduct({ currentListOfProduct: null });
   }
 
@@ -105,37 +109,44 @@ export class ListOfProductComponent implements OnInit {
 
   onChangeCurrentListOfProductName($event) {
     const listOfProductName = $event.target.value;
+    this.setListName(listOfProductName);
+  }
 
+  private setListName(listOfProductName: any) {
     this.listOfProductService.setNameOfListOfProduct({
       name: listOfProductName,
       listOfProductId: this.currentListOfProduct.id
     }).subscribe(r => {
       this.shoppingDataStore.setNameOfCurrentListOfProduct({ name: listOfProductName });
-    })
+    });
   }
 
   updateFormatedListOfProductWithCategories() {
-    const sortedProducts = [...this.currentListOfProduct.products ].sort((a, b) => a.product.category.name < b.product.category.name ? -1 : 1);
-
-    this.formatedDisplayedListOfProductWithCategories = {};
-    
-    for (const productOfList of sortedProducts) {
-
-      let category = this.formatedDisplayedListOfProductWithCategories[productOfList.product.category.name]; 
-
-      if (!category) {
-        this.formatedDisplayedListOfProductWithCategories[productOfList.product.category.name] = [];
-      }
-
-      this.formatedDisplayedListOfProductWithCategories[productOfList.product.category.name] = [...this.formatedDisplayedListOfProductWithCategories[productOfList.product.category.name], productOfList];
-
-    }
+    this.formatedDisplayedListOfProductWithCategories = getDisplayedListOfProductWithCategories(this.currentListOfProduct);
   }
 
   makeListOfProductNameFirstLettreUppercased(name: string) {
     this.currentListOfProduct.name = name.charAt(0).toUpperCase();
   }
 
+}
 
+function getDisplayedListOfProductWithCategories(listOfProduct: ListOfProductI) {
+  const sortedProducts = [...listOfProduct.products ].sort((a, b) => a.product.category.name < b.product.category.name ? -1 : 1);
 
+  const formatedDisplayedListOfProductWithCategories = {};
+  
+  for (const productOfList of sortedProducts) {
+
+    let category = formatedDisplayedListOfProductWithCategories[productOfList.product.category.name]; 
+
+    if (!category) {
+      formatedDisplayedListOfProductWithCategories[productOfList.product.category.name] = [];
+    }
+
+    formatedDisplayedListOfProductWithCategories[productOfList.product.category.name] = [...formatedDisplayedListOfProductWithCategories[productOfList.product.category.name], productOfList];
+
+    return formatedDisplayedListOfProductWithCategories;
+
+  }
 }
