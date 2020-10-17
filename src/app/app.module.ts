@@ -1,11 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { StoreModule } from '@ngrx/store';
-import userReducer from './ngrx/reducers/user.reducer';
-import shoppingDataReducer from './ngrx/reducers/Shopping/data.reducer';
-import shoppingNavigationReducer from './ngrx/reducers/Shopping/navigation.reducer';
-
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -26,7 +21,6 @@ import { ListOfProductComponent } from './components/shopping/list-of-product/li
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    StoreModule.forRoot({ user: userReducer, shoppingData: shoppingDataReducer, shoppingNavigation: shoppingNavigationReducer }),
     ReactiveFormsModule,
     FormsModule
   ],

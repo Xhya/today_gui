@@ -1,12 +1,12 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { SHOPPING_PAGE_NAMES } from 'src/app/helpers/navigation.helper';
-import { setCurrentListOfProduct, setNameOfCurrentListOfProduct } from 'src/app/ngrx/actions/Shopping/data.action';
-import { setPageToListOfLists } from 'src/app/ngrx/actions/Shopping/navigation.action';
 import { ListOfProductService } from 'src/app/services/Shopping/listOfProduct.service';
 import { ProductService } from 'src/app/services/Shopping/product.service';
+import ShoppingDataStore from 'src/app/store/Shopping/Data/data.store';
+import ShoppingNavigationStore from 'src/app/store/Shopping/Navigation/navigation.store';
+import UserStore from 'src/app/store/User/user.store';
 import { ListOfProductI } from 'src/app/_types/listOfProduct';
 import { UserI } from 'src/app/_types/user';
 
@@ -20,8 +20,8 @@ export class ListOfProductComponent implements OnInit {
 
   SHOPPING_PAGE_NAMES = SHOPPING_PAGE_NAMES;
 
-  pageName$: Observable<any>;
-  currentListOfProduct$: Observable<any>;
+  shoppingNavigation$: Observable<any>;
+  shoppingData$: Observable<any>;
   user$: Observable<any>;
 
   isSearchActive: boolean;
@@ -32,14 +32,15 @@ export class ListOfProductComponent implements OnInit {
   formatedDisplayedListOfProductWithCategories: object;
 
   constructor(
-    private store: Store<{ shoppingNavigation, shoppingData, user }>,
     private productService: ProductService,
     private listOfProductService: ListOfProductService,
+    private shoppingDataStore: ShoppingDataStore,
+    private shoppingNavigationStore: ShoppingNavigationStore,
+    private userStore: UserStore,
   ) { 
-    this.pageName$ = store.select(state => state.shoppingNavigation.pageName);
-    this.currentListOfProduct$ = store.select(state => state.shoppingData.currentListOfProduct);
-    this.user$ = store.select(state => state.user.user);
-      
+    this.shoppingNavigation$ = shoppingNavigationStore.state$;
+    this.shoppingData$ = shoppingDataStore.state$;
+    this.user$ = userStore.state$;
 
     this.searchedProductText = ""
     this.isSearchActive = false;
@@ -49,7 +50,6 @@ export class ListOfProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.initStore();
-
   }
 
     
@@ -59,13 +59,59 @@ export class ListOfProductComponent implements OnInit {
 
 
   initStore() {
-    this.currentListOfProduct$.subscribe(r => {
-      this.currentListOfProduct = { ...r };
+    this.shoppingData$.subscribe(r => {
+      this.currentListOfProduct = r.currentListOfProduct;
       this.updateFormatedListOfProductWithCategories();
     });
     this.user$.subscribe(r => {
-      this.currentUser = r;
+      this.currentUser = r.user;
     });  
+  }
+
+  onClickGoBack() {
+    this.shoppingNavigationStore.setPageToListOfProduct();
+    this.shoppingDataStore.setCurrentListOfProduct({ currentListOfProduct: null });
+  }
+
+  onClickPlusButton() {
+    this.isSearchActive = !this.isSearchActive;
+  }
+
+  onClickFoundProduct(product: ProductI) {
+    this.searchedProductText = "";
+    this.onChangeSearchedProductText();
+
+    this.listOfProductService.addProductToListOfProduct({
+      product: product,
+      listOfProductId: this.currentListOfProduct.id,
+      userId: this.currentUser.id,
+    }).subscribe(r => {
+      this.shoppingDataStore.setCurrentListOfProduct({ currentListOfProduct: r.body });
+    });
+  }
+
+  onChangeSearchedProductText() {
+    if (this.searchedProductText === "") {
+      this.foundProducts = [];
+      return;
+    }
+
+    this.productService.getProductsByName({
+      searchedText: this.searchedProductText
+    }).subscribe(r => {
+      this.foundProducts = r.body;
+    });
+  }
+
+  onChangeCurrentListOfProductName($event) {
+    const listOfProductName = $event.target.value;
+
+    this.listOfProductService.setNameOfListOfProduct({
+      name: listOfProductName,
+      listOfProductId: this.currentListOfProduct.id
+    }).subscribe(r => {
+      this.shoppingDataStore.setNameOfCurrentListOfProduct({ name: listOfProductName });
+    })
   }
 
   updateFormatedListOfProductWithCategories() {
@@ -86,55 +132,10 @@ export class ListOfProductComponent implements OnInit {
     }
   }
 
-  onClickGoBack() {
-    this.store.dispatch(setCurrentListOfProduct({ currentListOfProduct: null }))
-    this.store.dispatch(setPageToListOfLists());
-  }
-
-  onClickPlusButton() {
-    this.isSearchActive = !this.isSearchActive;
-  }
-
-
-  onChangeSearchedProductText() {
-    if (this.searchedProductText === "") {
-      this.foundProducts = [];
-      return;
-    }
-
-    this.productService.getProductsByName({
-      searchedText: this.searchedProductText
-    }).subscribe(r => {
-      this.foundProducts = r.body;
-    });
-  }
-
-  onClickFoundProduct(product: ProductI) {
-    this.searchedProductText = "";
-    this.onChangeSearchedProductText();
-
-    this.listOfProductService.addProductToListOfProduct({
-      product: product,
-      listOfProductId: this.currentListOfProduct.id,
-      userId: this.currentUser.id,
-    }).subscribe(r => {
-      this.store.dispatch(setCurrentListOfProduct({ currentListOfProduct: r.body }));
-    });
-  }
-
   makeListOfProductNameFirstLettreUppercased(name: string) {
     this.currentListOfProduct.name = name.charAt(0).toUpperCase();
   }
 
-  onChangeCurrentListOfProductName($event) {
-    const listOfProductName = $event.target.value;
 
-    this.listOfProductService.setNameOfListOfProduct({
-      name: listOfProductName,
-      listOfProductId: this.currentListOfProduct.id
-    }).subscribe(r => {
-      this.store.dispatch(setNameOfCurrentListOfProduct({ name: listOfProductName }));
-    })
-  }
 
 }

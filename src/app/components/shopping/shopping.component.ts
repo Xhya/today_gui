@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { getIsMobileScreen } from 'src/app/helpers/style.helper';
-
-import { ListOfProductService } from 'src/app/services/Shopping/listOfProduct.service';
+import UserStore from 'src/app/store/User/user.store';
+import ShoppingNavigationStore from 'src/app/store/Shopping/Navigation/navigation.store';
 
 import { UserI } from 'src/app/_types/user';
 
@@ -21,25 +20,21 @@ export class ShoppingComponent implements OnInit {
 
     currentUser: UserI;
 
-    constructor(
-      private readonly listOfProductService: ListOfProductService,
-      private store: Store<{ user, shoppingNavigation }>)
-    {  
-      this.user$ = store.select('user');
-      this.shoppingNavigation$ = store.select(state => state.shoppingNavigation.pageName);
+    constructor(private userStore: UserStore, private shoppingNavigationStore: ShoppingNavigationStore) {
+        this.shoppingNavigation$ = shoppingNavigationStore.state$;
     }
 
     ngOnInit(): void {
-      this.initUser();
+        this.initUser();
     }
 
     initUser() {
-      this.user$.subscribe((r) => {
-        this.currentUser = r['user'];
-      });
+        this.userStore.state$.subscribe((r) => {
+            this.currentUser = r.user;
+        });
     }
-  
+
     getIsMobileScreen() {
-      return getIsMobileScreen();
+        return getIsMobileScreen();
     }
 }

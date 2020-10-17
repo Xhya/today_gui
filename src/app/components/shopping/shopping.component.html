@@ -1,10 +1,10 @@
 <div class="app-shopping" *ngIf="getIsMobileScreen()">
-    <div class="title-container" *ngIf="(shoppingNavigation$ | async) === SHOPPING_PAGE_NAMES.LISTS_OF_LIST">
+    <div class="title-container" *ngIf="(shoppingNavigation$ | async).pageName === SHOPPING_PAGE_NAMES.LISTS_OF_LIST">
         <p>Today</p>
         <p>is a new day !</p>
     </div>
 
-    <div *ngIf="(shoppingNavigation$ | async) === SHOPPING_PAGE_NAMES.LISTS_OF_LIST">
+    <div *ngIf="(shoppingNavigation$ | async).pageName === SHOPPING_PAGE_NAMES.LISTS_OF_LIST">
 
         <div class="app-list-of-lists-of-product-container">
             <app-list-of-lists-of-product></app-list-of-lists-of-product>
@@ -12,7 +12,7 @@
         
     </div>
 
-    <div class="app-list-of-product-container" *ngIf="(shoppingNavigation$ | async) === SHOPPING_PAGE_NAMES.LIST_OF_PRODUCT">
+    <div class="app-list-of-product-container" *ngIf="(shoppingNavigation$ | async).pageName === SHOPPING_PAGE_NAMES.LIST_OF_PRODUCT">
         <app-list-of-product class="app-list-of-product"></app-list-of-product>
     </div>
 

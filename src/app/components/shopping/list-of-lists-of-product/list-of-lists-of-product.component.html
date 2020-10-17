@@ -1,7 +1,7 @@
 <div class="app-list-of-lists-of-product">
   
     <div>
-        <div *ngFor="let listOfProduct of listOfListOfProduct$ | async">
+        <div *ngFor="let listOfProduct of (shoppingData$ | async).listOfListOfProduct">
             <div (click)="onClickListOfProduct(listOfProduct)">
                 {{ listOfProduct.name }}
             </div>
