@@ -1,7 +1,8 @@
 <div class="app-shopping" *ngIf="getIsMobileScreen()">
     <div class="title-container" *ngIf="(shoppingNavigation$ | async).pageName === SHOPPING_PAGE_NAMES.LISTS_OF_LIST">
-        <p>Today</p>
+        <p>Today,</p>
         <p>is a new day !</p>
+        <p>Choisissez votre liste</p>
     </div>
 
     <div *ngIf="(shoppingNavigation$ | async).pageName === SHOPPING_PAGE_NAMES.LISTS_OF_LIST">

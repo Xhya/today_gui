@@ -1,4 +1,6 @@
-$TITLE_HEIGHT: 120px;
+@import "../../../assets/scss/colors.scss";
+
+$TITLE_HEIGHT: 210px;
 
 .app-shopping {
     flex-direction: column;
@@ -8,6 +10,25 @@ $TITLE_HEIGHT: 120px;
         border-bottom: solid 1px #dedede;
         height: $TITLE_HEIGHT;
         padding-left: 10px;
+        background-color: $TODAY_COLOR_4;
+
+        p {
+            &:nth-child(1) {
+                margin-top: 10px;
+            }
+
+            &:nth-child(1),
+            &:nth-child(2) {
+                color: $TODAY_COLOR_3;
+                font-size: 35px;    
+            }
+
+            &:nth-child(3) {
+                text-align: center;
+                color: white;
+                margin: 20px 0;
+            }
+        }
     }
 
     .app-list-of-lists-of-product-container {
