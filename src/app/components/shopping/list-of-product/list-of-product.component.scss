@@ -20,6 +20,17 @@
                 align-items: center;
                 font-size: 25px;
             }
+
+            .title-input {
+                background-color: transparent;
+                color: white;
+                align-items: center;
+                font-size: 25px;
+
+                &::placeholder {
+                    color: white;
+                }
+            }
             
             .shared-with {
                 position: absolute;
@@ -73,7 +84,6 @@
                     color: $TODAY_COLOR_1;
                     font-weight: bold;
                 }
-
             }
         }
 
@@ -116,9 +126,21 @@
                     max-width: 90px;
                     overflow: hidden;
                     text-overflow: ellipsis;
+                    cursor: pointer;
+                }
+
+                .name:hover {
+                    background-color: $TODAY_COLOR_1;
+                    color: white;
+                }
+
+                .selected {
+                    background-color: $TODAY_COLOR_1;
+                    color: white;
                 }
 
             }
+
         }
     }
 
@@ -170,6 +192,19 @@
 
                 .right {
                     justify-content: flex-end;
+
+                    div {
+                        width: 18px;
+                        border: solid 1px $TODAY_COLOR_4;
+                        border-radius: 10px;
+                        padding: 2px;
+
+                        div {
+                            border: solid 1px $TODAY_COLOR_4;
+                            border-radius: 10px;
+                            background-color: $TODAY_COLOR_4;
+                        }
+                    }
                 }
 
             }
