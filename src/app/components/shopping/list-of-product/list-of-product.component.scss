@@ -88,12 +88,13 @@
             }
         }
 
-        .check-button {
+        .search-plus-button {
             border-radius: 100%;
-            padding: 6px 11px;
+            padding: 2px 9px;
             height: fit-content;
             background-color: $TODAY_COLOR_1;
-            color: white
+            color: white;
+            font-size: 24px;
         }
 
         .relative-position-of-list-of-product {

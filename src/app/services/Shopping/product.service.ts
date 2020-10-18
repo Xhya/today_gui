@@ -13,4 +13,10 @@ export class ProductService {
     }): Observable<any> {
         return this.http.get('product/get-products-by-name', body);
     }
+
+    public createProduct(body: {
+        productName: string,
+    }): Observable<any> {
+        return this.http.post('product/create-product', body);
+    }
 }

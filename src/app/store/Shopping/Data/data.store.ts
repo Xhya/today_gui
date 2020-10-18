@@ -48,6 +48,19 @@ export default class ShoppingDataStore extends Store<InitialStateI> {
         });
     }
 
+    public addProductToCurrentListOfProduct(nextState: { product: ProductOfListI }): void {
+        const currentState = this.getState();
+
+        const currentListOfProduct = currentState.currentListOfProduct;
+
+        currentListOfProduct.products = [...currentListOfProduct.products, nextState.product];
+
+        this.setState({
+            listOfListOfProduct: currentState.listOfListOfProduct,
+            currentListOfProduct
+        });
+    }
+
     public setNameOfCurrentListOfProduct(nextState: { name: string }): void {
         const currentState = this.getState();
 

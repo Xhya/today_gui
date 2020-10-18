@@ -40,7 +40,7 @@
                         placeholder="..."
                     />
                 </div>
-                <button class="check-button">v</button>
+                <button (click)="onClickCreateProduct()" class="search-plus-button">+</button>
             </div>
             <div *ngIf="foundProducts.length > 0" class="relative-position-of-list-of-product">
                 <div class="list-of-product-container">

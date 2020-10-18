@@ -87,14 +87,23 @@ export class ListOfProductComponent implements OnInit {
   onClickFoundProduct(product: ProductI) {
     this.searchedProductText = "";
     this.onChangeSearchedProductText();
+    this.addProductToList(product);
+  }
 
-    this.listOfProductService.addProductToListOfProduct({
+  async onClickCreateProduct() {
+    const r = await this.productService.createProduct({ productName: this.searchedProductText }).toPromise();
+    this.addProductToList(r.body);
+    this.searchedProductText = "";
+  }
+
+  async addProductToList(product: ProductI) { 
+    const r = await this.listOfProductService.addProductToListOfProduct({
       product: product,
       listOfProductId: this.currentListOfProduct.id,
       userId: this.currentUser.id,
-    }).subscribe(r => {
-      this.shoppingDataStore.setCurrentListOfProduct({ currentListOfProduct: r.body });
-    });
+    }).toPromise()
+
+    this.shoppingDataStore.setCurrentListOfProduct({ currentListOfProduct: r.body });
   }
 
   onChangeSearchedProductText() {
@@ -148,8 +157,8 @@ function getDisplayedListOfProductWithCategories(listOfProduct: ListOfProductI) 
     }
 
     formatedDisplayedListOfProductWithCategories[productOfList.product.category.name] = [...formatedDisplayedListOfProductWithCategories[productOfList.product.category.name], productOfList];
-
-    return formatedDisplayedListOfProductWithCategories;
-
   }
+
+  return formatedDisplayedListOfProductWithCategories;
+
 }
