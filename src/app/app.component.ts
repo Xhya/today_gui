@@ -26,12 +26,12 @@ export class AppComponent {
 
     if (todayUUID === null) {
       this.userService.createEmptyUser().subscribe(response => {
-        // this.localStorageService.setUserId(response.body.id);
+        this.localStorageService.setUserId(response.body.id);
         this.userStore.setUser({ user: response.body });
       });
     } else {
       this.userService.getUserById({ userId: todayUUID }).subscribe(r => {
-        // this.userStore.setUser({ user:  });
+        this.userStore.setUser({ user: r.body });
       });
     }
   }
