@@ -42,8 +42,6 @@ export default class ShoppingDataStore extends Store<InitialStateI> {
     public setCurrentListOfProduct(nextState: { currentListOfProduct: ListOfProductI }): void {
         const currentState = this.getState();
 
-        console.log('nextState.currentListOfProduct:', nextState.currentListOfProduct);
-
         this.setState({
             listOfListOfProduct: currentState.listOfListOfProduct,
             currentListOfProduct: nextState.currentListOfProduct
