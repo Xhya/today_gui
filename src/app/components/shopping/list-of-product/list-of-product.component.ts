@@ -96,6 +96,20 @@ export class ListOfProductComponent implements OnInit {
     this.searchedProductText = "";
   }
 
+  async onClickToggleProductOfListChecked(product: ProductOfListI) {
+    const r = await this.listOfProductService.toggleProductOfListChecked({
+      productId: product.id,
+      userId: this.currentUser.id
+    }).toPromise();
+    const updatedProductOfList = r.body;
+    const updatedProductOfListOfCurrentList = this.currentListOfProduct.products.find(p => p.id === updatedProductOfList.id);
+
+    // TODO: if undefined
+
+    updatedProductOfListOfCurrentList.isChecked = updatedProductOfList.isChecked;
+    updatedProductOfListOfCurrentList.checkedById = updatedProductOfList.checkedById;
+  }
+
   async addProductToList(product: ProductI) { 
     const r = await this.listOfProductService.addProductToListOfProduct({
       product: product,

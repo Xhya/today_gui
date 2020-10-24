@@ -77,9 +77,10 @@
                             </div>
 
                             <div class="right">
-                                <div>
-                                    <div></div>
-                                </div>
+                                <app-switch-checkbox-circle
+                                    [isChecked]="product.isChecked"
+                                    (triggerOnClickToggleCheckbox)="onClickToggleProductOfListChecked(product)"
+                                ></app-switch-checkbox-circle>
                             </div>
                         </div>
                     </div>

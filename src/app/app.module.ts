@@ -9,13 +9,15 @@ import { AppComponent } from './app.component';
 import { ShoppingComponent } from './components/shopping/shopping.component';
 import { ListOfListsOfProductComponent } from './components/shopping/list-of-lists-of-product/list-of-lists-of-product.component';
 import { ListOfProductComponent } from './components/shopping/list-of-product/list-of-product.component';
+import { SwitchCheckboxCircleComponent } from './components/shared/switch-checkbox-circle/switch-checkbox-circle.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ShoppingComponent,
     ListOfListsOfProductComponent,
-    ListOfProductComponent
+    ListOfProductComponent,
+    SwitchCheckboxCircleComponent
   ],
   imports: [
     BrowserModule,

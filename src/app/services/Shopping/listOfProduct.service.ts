@@ -35,4 +35,11 @@ export class ListOfProductService {
     }): Observable<any> {
         return this.http.post('list-of-product/set-name', body);
     }
+
+    public toggleProductOfListChecked(body: {
+        productId: string,
+        userId: string,
+    }): Observable<any> {
+        return this.http.post('list-of-product/toggle-checked', body);
+    }
 }
