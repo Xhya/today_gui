@@ -194,19 +194,6 @@
 
                 .right {
                     justify-content: flex-end;
-
-                    div {
-                        width: 18px;
-                        border: solid 1px $TODAY_COLOR_4;
-                        border-radius: 10px;
-                        padding: 2px;
-
-                        div {
-                            border: solid 1px $TODAY_COLOR_4;
-                            border-radius: 10px;
-                            background-color: $TODAY_COLOR_4;
-                        }
-                    }
                 }
 
             }

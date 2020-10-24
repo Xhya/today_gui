@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { SHOPPING_PAGE_NAMES } from 'src/app/helpers/navigation.helper';
 import { ListOfProductService } from 'src/app/services/Shopping/listOfProduct.service';
 import { ProductService } from 'src/app/services/Shopping/product.service';
+import { ProductOfListService } from 'src/app/services/Shopping/productOfList.service';
 import ShoppingDataStore from 'src/app/store/Shopping/Data/data.store';
 import ShoppingNavigationStore from 'src/app/store/Shopping/Navigation/navigation.store';
 import UserStore from 'src/app/store/User/user.store';
@@ -94,6 +95,20 @@ export class ListOfProductComponent implements OnInit {
     const r = await this.productService.createProduct({ productName: this.searchedProductText }).toPromise();
     this.addProductToList(r.body);
     this.searchedProductText = "";
+  }
+
+  async onClickToggleProductOfListChecked(product: ProductOfListI) {
+    const r = await this.listOfProductService.toggleProductOfListChecked({
+      productId: product.id,
+      userId: this.currentUser.id
+    }).toPromise();
+    const updatedProductOfList = r.body;
+    const updatedProductOfListOfCurrentList = this.currentListOfProduct.products.find(p => p.id === updatedProductOfList.id);
+
+    // TODO: if undefined
+
+    updatedProductOfListOfCurrentList.isChecked = updatedProductOfList.isChecked;
+    updatedProductOfListOfCurrentList.checkedById = updatedProductOfList.checkedById;
   }
 
   async addProductToList(product: ProductI) { 

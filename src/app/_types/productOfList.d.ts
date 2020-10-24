@@ -12,5 +12,5 @@ interface ProductOfListI {
     quantity: number;
 
     isChecked: boolean;
-    checkedBy: string;
+    checkedById: string;
 }
