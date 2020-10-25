@@ -11,6 +11,7 @@ import { ListOfListsOfProductComponent } from './components/shopping/list-of-lis
 import { ListOfProductComponent } from './components/shopping/list-of-product/list-of-product.component';
 import { SwitchCheckboxCircleComponent } from './components/shared/switch-checkbox-circle/switch-checkbox-circle.component';
 import { UpfrontModalComponent } from './components/shared/upfront-modal/upfront-modal.component';
+import { CategoryOfProductSelectorComponent } from './components/shopping/category-of-product-selector/category-of-product-selector.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { UpfrontModalComponent } from './components/shared/upfront-modal/upfront
     ListOfListsOfProductComponent,
     ListOfProductComponent,
     SwitchCheckboxCircleComponent,
-    UpfrontModalComponent
+    UpfrontModalComponent,
+    CategoryOfProductSelectorComponent
   ],
   imports: [
     BrowserModule,
