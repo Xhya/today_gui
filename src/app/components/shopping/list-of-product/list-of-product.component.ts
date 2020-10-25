@@ -5,6 +5,7 @@ import { SHOPPING_PAGE_NAMES } from 'src/app/helpers/navigation.helper';
 import { getTextWithFirstLetterUppercased } from 'src/app/helpers/utils/string.utils';
 import { ListOfProductService } from 'src/app/services/Shopping/listOfProduct.service';
 import { ProductService } from 'src/app/services/Shopping/product.service';
+import { ProductOfListService } from 'src/app/services/Shopping/productOfList.service';
 import ShoppingDataStore from 'src/app/store/Shopping/Data/data.store';
 import ShoppingNavigationStore from 'src/app/store/Shopping/Navigation/navigation.store';
 import UserStore from 'src/app/store/User/user.store';
