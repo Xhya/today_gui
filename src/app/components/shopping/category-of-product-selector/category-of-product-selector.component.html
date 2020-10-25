@@ -14,8 +14,8 @@
 
 
     <div class="ng-for-container">
-        <div *ngFor="let category of listOfCategory">
-            <div class="name" (click)="onClickCategoryName(category.id)">{{ category.name }}</div>
+        <div class="ng-for" *ngFor="let category of listOfCategory">
+            <p class="name" (click)="onClickCategoryName(category.id)">{{ category.name }}</p>
         </div>
     </div>
 </div>

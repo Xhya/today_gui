@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { getTextWithFirstLetterUppercased } from 'src/app/helpers/utils/string.utils';
 import { CategoryOfProductService } from 'src/app/services/Shopping/categoryOfProduct.service';
 
 @Component({
@@ -39,7 +40,11 @@ export class CategoryOfProductSelectorComponent implements OnInit {
   }
 
   async onClickCreateCategory() {
-    const r1 = await this.categoryOfProductService.createCategory({ name: this.categoryName }).toPromise();
+    if (this.categoryName === "") {
+      return;
+    }
+
+    const r1 = await this.categoryOfProductService.createCategory({ name: getTextWithFirstLetterUppercased(this.categoryName) }).toPromise();
     this.triggerCreateProduct.emit(r1.body.id);
   }
 

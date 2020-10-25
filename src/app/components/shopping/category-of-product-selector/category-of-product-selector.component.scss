@@ -36,18 +36,30 @@
     .ng-for-container {
         height: fit-content;
         width: 90%;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+
+        .ng-for {
+            height: fit-content;
+            width: fit-content;
+            margin-right: 20px;
+            margin-bottom: 20px;
+
+            .name {
+                white-space: nowrap;
+                color: $TODAY_COLOR_5;
+                background-color: white;
+                border-radius: 100px;
+                box-shadow: 1px 1px 3px $TODAY_COLOR_5;
+                padding: 4px 10px;
+                max-width: 90px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                cursor: pointer;
+            }
+        }
+
     }
 
-    .name {
-        white-space: nowrap;
-        color: $TODAY_COLOR_5;
-        background-color: white;
-        border-radius: 100px;
-        box-shadow: 1px 1px 3px $TODAY_COLOR_5;
-        padding: 4px 10px;
-        max-width: 90px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        cursor: pointer;
-    }
+    
 }

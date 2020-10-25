@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { SHOPPING_PAGE_NAMES } from 'src/app/helpers/navigation.helper';
-import { CategoryOfProductService } from 'src/app/services/Shopping/categoryOfProduct.service';
+import { getTextWithFirstLetterUppercased } from 'src/app/helpers/utils/string.utils';
 import { ListOfProductService } from 'src/app/services/Shopping/listOfProduct.service';
 import { ProductService } from 'src/app/services/Shopping/product.service';
 import ShoppingDataStore from 'src/app/store/Shopping/Data/data.store';
@@ -94,6 +94,9 @@ export class ListOfProductComponent implements OnInit {
   }
 
   onClickCreateProduct() {
+    if (this.searchedProductText === "") {
+      return;
+    }
     this.openCategoryModal();
   }
 
@@ -165,7 +168,11 @@ export class ListOfProductComponent implements OnInit {
   }
 
   async createProductOfList(categoryId: string) {
-    const r = await this.productService.createProduct({ productName: this.searchedProductText, categoryId }).toPromise();
+    if (this.searchedProductText === "") {
+      return;
+    }
+
+    const r = await this.productService.createProduct({ productName: getTextWithFirstLetterUppercased(this.searchedProductText), categoryId }).toPromise();
     this.addProductToList(r.body);
     this.searchedProductText = "";
     this.closeCategoryModal();
