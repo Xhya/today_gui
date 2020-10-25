@@ -1,1 +1,7 @@
-<p>upfront-modal works!</p>
+<div class="app-upfront-modal">
+    <div class="background"></div>
+    <button (click)="closeModal()" class="button-close">X</button>
+    <div class="content">
+        <ng-content></ng-content>
+    </div>
+</div>

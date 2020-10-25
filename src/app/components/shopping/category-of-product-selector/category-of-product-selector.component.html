@@ -1,1 +1,21 @@
-<p>category-of-product-selector works!</p>
+<div class="app-category-of-product-selector">
+
+    <div class="search-bar">
+        <input 
+            type="text"
+            class="input-category-name"
+            placeholder="Nom de la catégorie"
+            [(ngModel)]="categoryName"
+            (ngModelChange)="onChangeCategoryName()"
+        />
+
+        <button (click)="onClickCreateCategory()">+</button>
+    </div>
+
+
+    <div class="ng-for-container">
+        <div *ngFor="let category of listOfCategory">
+            <div class="name" (click)="onClickCategoryName(category.id)">{{ category.name }}</div>
+        </div>
+    </div>
+</div>

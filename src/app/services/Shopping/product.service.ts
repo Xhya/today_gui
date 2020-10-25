@@ -16,6 +16,7 @@ export class ProductService {
 
     public createProduct(body: {
         productName: string,
+        categoryId: string
     }): Observable<any> {
         return this.http.post('product/create-product', body);
     }

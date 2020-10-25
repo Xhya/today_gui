@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { CategoryOfProductService } from 'src/app/services/Shopping/categoryOfProduct.service';
 
 @Component({
   selector: 'app-category-of-product-selector',
@@ -6,10 +7,45 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./category-of-product-selector.component.scss']
 })
 export class CategoryOfProductSelectorComponent implements OnInit {
+  @Output() triggerCreateProduct = new EventEmitter<any>();
 
-  constructor() { }
+  listOfCategory: CategoryOfProductI[];
+  categoryName: string;
 
-  ngOnInit(): void {
+  constructor(
+    private readonly categoryOfProductService: CategoryOfProductService
+  ) { }
+
+  ngOnInit() {
+    this.initListOfCategory();
+  }
+
+  async initListOfCategory() {
+    const response = await this.categoryOfProductService.getAllCategories().toPromise();
+    this.listOfCategory = response.body;
+  }
+
+  async updateCategoryList() {
+    const response = await this.categoryOfProductService.searchCategoryByName({ name: this.categoryName }).toPromise();
+    this.listOfCategory = response.body;
+  }
+
+  onChangeCategoryName() {
+    if (this.categoryName !== "") {
+      this.updateCategoryList();
+    } else {
+      this.initListOfCategory();
+    }
+  }
+
+  async onClickCreateCategory() {
+    const r1 = await this.categoryOfProductService.createCategory({ name: this.categoryName }).toPromise();
+    this.triggerCreateProduct.emit(r1.body.id);
+  }
+
+  async onClickCategoryName(categoryId) {
+    this.triggerCreateProduct.emit(categoryId);
+
   }
 
 }

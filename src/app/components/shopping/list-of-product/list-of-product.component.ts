@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { SHOPPING_PAGE_NAMES } from 'src/app/helpers/navigation.helper';
+import { CategoryOfProductService } from 'src/app/services/Shopping/categoryOfProduct.service';
 import { ListOfProductService } from 'src/app/services/Shopping/listOfProduct.service';
 import { ProductService } from 'src/app/services/Shopping/product.service';
 import ShoppingDataStore from 'src/app/store/Shopping/Data/data.store';
@@ -30,6 +31,7 @@ export class ListOfProductComponent implements OnInit {
   currentListOfProduct: ListOfProductI;
   currentUser: UserI;
   formatedDisplayedListOfProductWithCategories: object;
+  isCategoryModalOpen: boolean;
 
   constructor(
     private productService: ProductService,
@@ -46,6 +48,7 @@ export class ListOfProductComponent implements OnInit {
     this.isSearchActive = false;
     this.foundProducts = [];
     this.formatedDisplayedListOfProductWithCategories = {};
+    this.isCategoryModalOpen = false;
   }
 
   ngOnInit(): void {
@@ -90,10 +93,8 @@ export class ListOfProductComponent implements OnInit {
     this.addProductToList(product);
   }
 
-  async onClickCreateProduct() {
-    const r = await this.productService.createProduct({ productName: this.searchedProductText }).toPromise();
-    this.addProductToList(r.body);
-    this.searchedProductText = "";
+  onClickCreateProduct() {
+    this.openCategoryModal();
   }
 
   async onClickToggleProductOfListChecked(product: ProductOfListI) {
@@ -108,16 +109,6 @@ export class ListOfProductComponent implements OnInit {
 
     updatedProductOfListOfCurrentList.isChecked = updatedProductOfList.isChecked;
     updatedProductOfListOfCurrentList.checkedById = updatedProductOfList.checkedById;
-  }
-
-  async addProductToList(product: ProductI) { 
-    const r = await this.listOfProductService.addProductToListOfProduct({
-      product: product,
-      listOfProductId: this.currentListOfProduct.id,
-      userId: this.currentUser.id,
-    }).toPromise()
-
-    this.shoppingDataStore.setCurrentListOfProduct({ currentListOfProduct: r.body });
   }
 
   onChangeSearchedProductText() {
@@ -138,6 +129,16 @@ export class ListOfProductComponent implements OnInit {
     this.setListName(listOfProductName);
   }
 
+  async addProductToList(product: ProductI) { 
+    const r = await this.listOfProductService.addProductToListOfProduct({
+      product: product,
+      listOfProductId: this.currentListOfProduct.id,
+      userId: this.currentUser.id,
+    }).toPromise();
+
+    this.shoppingDataStore.setCurrentListOfProduct({ currentListOfProduct: r.body });
+  }
+
   private setListName(listOfProductName: any) {
     this.listOfProductService.setNameOfListOfProduct({
       name: listOfProductName,
@@ -155,9 +156,25 @@ export class ListOfProductComponent implements OnInit {
     this.currentListOfProduct.name = name.charAt(0).toUpperCase();
   }
 
+  openCategoryModal() {
+    this.isCategoryModalOpen = true;
+  }
+  
+  closeCategoryModal() {
+    this.isCategoryModalOpen = false;
+  }
+
+  async createProductOfList(categoryId: string) {
+    const r = await this.productService.createProduct({ productName: this.searchedProductText, categoryId }).toPromise();
+    this.addProductToList(r.body);
+    this.searchedProductText = "";
+    this.closeCategoryModal();
+  }
+
 }
 
 function getDisplayedListOfProductWithCategories(listOfProduct: ListOfProductI) {
+  // TODO: write test
   const sortedProducts = [...listOfProduct.products ].sort((a, b) => a.product.category.name < b.product.category.name ? -1 : 1);
 
   const formatedDisplayedListOfProductWithCategories = {};

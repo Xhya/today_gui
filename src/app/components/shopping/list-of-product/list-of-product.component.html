@@ -32,14 +32,13 @@
             [ngClass]="{ 'border-top-right-radius': isSearchActive } "
         >
             <div class="text-container">
-                <div class="text">
-                    <input 
-                        type="text"
-                        [(ngModel)]="searchedProductText"
-                        (ngModelChange)="onChangeSearchedProductText()"
-                        placeholder="..."
-                    />
-                </div>
+                <input 
+                    class="search-input-1"
+                    type="text"
+                    [(ngModel)]="searchedProductText"
+                    (ngModelChange)="onChangeSearchedProductText()"
+                    placeholder="..."
+                />
                 <button (click)="onClickCreateProduct()" class="search-plus-button">+</button>
             </div>
             <div *ngIf="foundProducts.length > 0" class="relative-position-of-list-of-product">
@@ -101,6 +100,19 @@
         </div>
     </button>
 
+    <app-upfront-modal 
+        *ngIf="isCategoryModalOpen"
+        (triggerCloseModal)="closeCategoryModal()"
+    >
+        <app-category-of-product-selector 
+            class="app-category-of-product-selector"
+            (triggerCreateProduct)="createProductOfList($event)"
+        ></app-category-of-product-selector>
+    </app-upfront-modal>
 
 </div>
+
+
+
+
 
