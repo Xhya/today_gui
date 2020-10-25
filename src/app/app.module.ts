@@ -10,6 +10,7 @@ import { ShoppingComponent } from './components/shopping/shopping.component';
 import { ListOfListsOfProductComponent } from './components/shopping/list-of-lists-of-product/list-of-lists-of-product.component';
 import { ListOfProductComponent } from './components/shopping/list-of-product/list-of-product.component';
 import { SwitchCheckboxCircleComponent } from './components/shared/switch-checkbox-circle/switch-checkbox-circle.component';
+import { UpfrontModalComponent } from './components/shared/upfront-modal/upfront-modal.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { SwitchCheckboxCircleComponent } from './components/shared/switch-checkb
     ShoppingComponent,
     ListOfListsOfProductComponent,
     ListOfProductComponent,
-    SwitchCheckboxCircleComponent
+    SwitchCheckboxCircleComponent,
+    UpfrontModalComponent
   ],
   imports: [
     BrowserModule,
