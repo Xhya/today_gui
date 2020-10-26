@@ -12,25 +12,6 @@
         height: 30px;
         margin-bottom: 20px;
         width: 80%;
-
-        input {
-            border-radius: 100px;
-            padding-left: 10px;
-            border: solid 1px $TODAY_COLOR_1;
-            text-transform: capitalize;
-            color: $TODAY_COLOR_1;
-            font-weight: bold;
-            margin-right: 5px;
-        }
-
-        button {
-            border-radius: 100%;
-            padding: 2px 9px;
-            height: fit-content;
-            background-color: $TODAY_COLOR_1;
-            color: white;
-            font-size: 24px;
-        }
     }
 
     .ng-for-container {

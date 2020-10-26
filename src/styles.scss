@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@import './assets/scss/colors.scss';
 
 html, body {
     height: 100%;
@@ -52,6 +53,25 @@ p {
     font-size: 40px;
     color: white;
     cursor: pointer;
+}
+
+.input-search-1 {
+    margin-right: 5px;
+    border-radius: 100px;
+    padding-left: 10px;
+    border: solid 1px $TODAY_COLOR_1;
+    text-transform: capitalize;
+    color: $TODAY_COLOR_1;
+    font-weight: bold;
+}
+
+.button-plus-search-1 {
+    border-radius: 100%;
+    padding: 2px 9px;
+    height: fit-content;
+    background-color: $TODAY_COLOR_1;
+    color: white;
+    font-size: 24px;
 }
 
 .border-top-right-radius {

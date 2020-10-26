@@ -2,14 +2,14 @@
 
     <div class="search-bar">
         <input 
+            class="input-search-1"
             type="text"
-            class="input-category-name"
             placeholder="Nom de la catégorie"
             [(ngModel)]="categoryName"
             (ngModelChange)="onChangeCategoryName()"
         />
 
-        <button (click)="onClickCreateCategory()">+</button>
+        <button class="button-plus-search-1" (click)="onClickCreateCategory()">+</button>
     </div>
 
 
