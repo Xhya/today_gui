@@ -42,4 +42,12 @@ export class ListOfProductService {
     }): Observable<any> {
         return this.http.post('list-of-product/toggle-checked', body);
     }
+
+    public setQuantityOfProduct(body: {
+        quantity: number,
+        quantityUnit: string,
+        productId: string
+    }): Observable<any> {
+        return this.http.post('list-of-product/set-quantity-of-product', body);
+    }
 }

@@ -175,26 +175,45 @@
                 font-weight: bold;
             }
 
-            .ng-for-products {
-                padding: 9px 5% 9px 52px;
+            .ng-for-list-of-product {
+                flex-direction: column;
 
-                .left {
+                .item-product {
+                    padding: 9px 5% 9px 52px;
 
-                    .quantity {
-                        width: fit-content;
-                        padding-right: 20px;
-                        color: $TODAY_COLOR_4;
+                    .left {
+
+                        .quantity {
+                            width: fit-content;
+                            padding-right: 20px;
+                            color: $TODAY_COLOR_4;
+                        }
+
+                        .name {
+                            color: $TODAY_COLOR_5;
+                        }
                     }
 
-                    .name {
-                        color: $TODAY_COLOR_5;
+                    .right {
+                        justify-content: flex-end;
+                    }
+
+                }
+
+                .quantity-selector-container {
+                    flex-direction: column;
+                    margin-left: 15%;
+                    width: fit-content;
+
+                    .field-name {
+                        width: 40%;
+                        margin-bottom: 5px;
+                    }
+
+                    .quantity-content {
+                        width: 20%;
                     }
                 }
-
-                .right {
-                    justify-content: flex-end;
-                }
-
             }
         }
 

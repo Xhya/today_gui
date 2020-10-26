@@ -21,6 +21,13 @@ export class ListOfProductComponent implements OnInit {
   @ViewChild("nameOflistOfProductInput", { static: false }) nameOflistOfProductInput: ElementRef;
 
   SHOPPING_PAGE_NAMES = SHOPPING_PAGE_NAMES;
+  QUANTITY_UNIT = {
+    INDIVIDUAL: "ind",
+    GRAM: "gr",
+    KILOGRAM: "kg",
+    CENTILITER: "cl",
+    LITER: "L"
+  }
 
   shoppingNavigation$: Observable<any>;
   shoppingData$: Observable<any>;
@@ -33,6 +40,8 @@ export class ListOfProductComponent implements OnInit {
   currentUser: UserI;
   formatedDisplayedListOfProductWithCategories: object;
   isCategoryModalOpen: boolean;
+
+  idOfSelectedProductForQuantitySelector: string;
 
   constructor(
     private productService: ProductService,
@@ -50,6 +59,7 @@ export class ListOfProductComponent implements OnInit {
     this.foundProducts = [];
     this.formatedDisplayedListOfProductWithCategories = {};
     this.isCategoryModalOpen = false;
+    this.idOfSelectedProductForQuantitySelector = null;
   }
 
   ngOnInit(): void {
@@ -115,6 +125,25 @@ export class ListOfProductComponent implements OnInit {
     updatedProductOfListOfCurrentList.checkedById = updatedProductOfList.checkedById;
   }
 
+  async onClickQuantityOfProduct(productId: string) {
+    if (this.idOfSelectedProductForQuantitySelector === null) {
+      this.idOfSelectedProductForQuantitySelector = productId;
+    } else {
+      this.idOfSelectedProductForQuantitySelector = null;
+    }
+  }
+
+  onClickSelectQuantityUnit(productId, quantityUnit) {
+    const productOfList = this.currentListOfProduct.products.find(p => p.id === productId);
+
+    if (productOfList === undefined) {
+      throw new Error("Invalid id [ productId ]");
+    }
+
+    productOfList.quantityUnit = quantityUnit;
+    this.setQuantityOfProduct({ quantity: productOfList.quantity, quantityUnit: productOfList.quantityUnit, productId: productOfList.id });
+  }
+
   onChangeSearchedProductText() {
     if (this.searchedProductText === "") {
       this.foundProducts = [];
@@ -131,6 +160,10 @@ export class ListOfProductComponent implements OnInit {
   onChangeCurrentListOfProductName($event) {
     const listOfProductName = $event.target.value;
     this.setListName(listOfProductName);
+  }
+
+  onChangeQuantityOfProduct(product: ProductOfListI) {
+    this.setQuantityOfProduct({ quantity: product.quantity, quantityUnit: product.quantityUnit, productId: product.id });
   }
 
   async addProductToList(product: ProductI) { 
@@ -150,6 +183,10 @@ export class ListOfProductComponent implements OnInit {
     }).subscribe(r => {
       this.shoppingDataStore.setNameOfCurrentListOfProduct({ name: listOfProductName });
     });
+  }
+
+  async setQuantityOfProduct({ quantity, quantityUnit, productId }) {
+    await this.listOfProductService.setQuantityOfProduct({ quantity, quantityUnit, productId }).toPromise();
   }
 
   updateFormatedListOfProductWithCategories() {

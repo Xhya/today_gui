@@ -33,7 +33,6 @@
         >
             <div class="text-container">
                 <input 
-                    class="search-input-1"
                     type="text"
                     [(ngModel)]="searchedProductText"
                     (ngModelChange)="onChangeSearchedProductText()"
@@ -67,12 +66,16 @@
                         </div>
                     </div>
 
-                    <div *ngFor="let product of item.value">
+                    <div class="ng-for-list-of-product" *ngFor="let product of item.value">
 
-                        <div class="ng-for-products">
+                        <div class="item-product">
                             <div class="left">
-                                <div class="quantity">{{product.quantity }}</div>
-                                <div class="name">{{product.name }}</div>                  
+                                <div class="quantity" (click)="onClickQuantityOfProduct(product.id)">
+                                    {{ product.quantity }}
+                                    <div *ngIf="product.quantityUnit !== QUANTITY_UNIT.INDIVIDUAL">{{ product.quantityUnit }}</div>
+                                </div>
+
+                                <div class="name">{{ product.name }}</div>                  
                             </div>
 
                             <div class="right">
@@ -80,6 +83,74 @@
                                     [isChecked]="product.isChecked"
                                     (triggerOnClickToggleCheckbox)="onClickToggleProductOfListChecked(product)"
                                 ></app-switch-checkbox-circle>
+                            </div>
+                        </div>
+
+                        <div *ngIf="idOfSelectedProductForQuantitySelector === product.id" class="quantity-selector-container">
+                            <div>
+                                <div class="field-name">Quantité</div>
+                                <input 
+                                    *ngIf="product.quantityUnit === QUANTITY_UNIT.INDIVIDUAL"
+                                    type="number" 
+                                    class="quantity-content" 
+                                    [(ngModel)]="product.quantity"
+                                    (ngModelChange)="onChangeQuantityOfProduct(product)"
+                                />
+                                <div 
+                                    *ngIf="product.quantityUnit !== QUANTITY_UNIT.INDIVIDUAL"
+                                    class="quantity-content" 
+                                    (click)="onClickSelectQuantityUnit(product.id, QUANTITY_UNIT.INDIVIDUAL)"
+                                >-</div>
+                            </div>
+                            <div>
+                                <div class="field-name">Poids</div>
+                                <input 
+                                    *ngIf="product.quantityUnit === QUANTITY_UNIT.GRAM || product.quantityUnit === QUANTITY_UNIT.KILOGRAM"
+                                    type="number" 
+                                    class="quantity-content" 
+                                    [(ngModel)]="product.quantity"
+                                    (ngModelChange)="onChangeQuantityOfProduct(product)"
+                                />
+                                <div 
+                                    *ngIf="product.quantityUnit !== QUANTITY_UNIT.GRAM && product.quantityUnit !== QUANTITY_UNIT.KILOGRAM"
+                                    class="quantity-content" 
+                                    (click)="onClickSelectQuantityUnit(product.id, QUANTITY_UNIT.GRAM)"
+                                >-</div>
+                                <div 
+                                    class="quantity-content" 
+                                    [ngClass]="{ 'bold': product.quantityUnit === QUANTITY_UNIT.GRAM } " 
+                                    (click)="onClickSelectQuantityUnit(product.id, QUANTITY_UNIT.GRAM)"
+                                >gr.</div>
+                                <div 
+                                    class="quantity-content" 
+                                    [ngClass]="{ 'bold': product.quantityUnit === QUANTITY_UNIT.KILOGRAM } " 
+                                    (click)="onClickSelectQuantityUnit(product.id, QUANTITY_UNIT.KILOGRAM)"
+                                >kg.</div>
+                            </div>
+                            <div>
+                                <div class="field-name">Litres</div>
+                                <input 
+                                    *ngIf="product.quantityUnit === QUANTITY_UNIT.CENTILITER || product.quantityUnit === QUANTITY_UNIT.LITER"
+                                    type="number" 
+                                    class="quantity-content" 
+                                    [(ngModel)]="product.quantity"
+                                    (ngModelChange)="onChangeQuantityOfProduct(product)"
+                                />
+                                <div 
+                                    *ngIf="product.quantityUnit !== QUANTITY_UNIT.CENTILITER && product.quantityUnit !== QUANTITY_UNIT.LITER"
+                                    class="quantity-content" 
+                                    (click)="onClickSelectQuantityUnit(product.id, QUANTITY_UNIT.CENTILITER)"
+                                >-</div>
+                                <div 
+                                    class="quantity-content" 
+                                    [ngClass]="{ 'bold': product.quantityUnit === QUANTITY_UNIT.CENTILITER } " 
+                                    (click)="onClickSelectQuantityUnit(product.id, QUANTITY_UNIT.CENTILITER)"
+                                >cl.</div>
+                                <div 
+                                    class="quantity-content" 
+                                    [ngClass]="{ 'bold': product.quantityUnit === QUANTITY_UNIT.LITER } " 
+                                    (click)="onClickSelectQuantityUnit(product.id, QUANTITY_UNIT.LITER)"
+                                >L.</div>
                             </div>
                         </div>
                     </div>

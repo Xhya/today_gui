@@ -10,6 +10,7 @@ interface ProductOfListI {
     creationDate: string;
 
     quantity: number;
+    quantityUnit: string;
 
     isChecked: boolean;
     checkedById: string;
