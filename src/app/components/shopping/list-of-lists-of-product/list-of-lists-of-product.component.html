@@ -1,13 +1,30 @@
 <div class="app-list-of-lists-of-product">
   
-    <div class="ng-for-container">
+    <div class="ng-for-container list-of-list-of-product-container">
         <div class="ng-for" *ngFor="let listOfProduct of (shoppingData$ | async).listOfListOfProduct">
             <div class="item" (click)="onClickListOfProduct(listOfProduct)">
                 <p *ngIf="listOfProduct.name">{{ listOfProduct.name }}</p>
                 <p *ngIf="!listOfProduct.name" class="name-undefined">A définir</p>
             </div>
         </div> 
-        
+    </div>
+
+    <div class="recently-used-container">
+        <p class="text">Utilisés recemment</p>
+        <div class="ng-for-container">
+            <div class="ng-for" *ngFor="let product of recentlyUsedProducts">
+                <p class="text-product-name-1">{{ product.name }}</p>
+            </div>
+        </div> 
+    </div>
+
+    <div class="seasonal-product-container">
+        <p class="text">Et si on pensait aux produits de saison ?</p>
+        <div class="ng-for-container">
+            <div class="ng-for" *ngFor="let product of recentlyUsedProducts">
+                <p class="text-product-name-1">{{ product.name }}</p>
+            </div>
+        </div> 
     </div>
 
     <button 

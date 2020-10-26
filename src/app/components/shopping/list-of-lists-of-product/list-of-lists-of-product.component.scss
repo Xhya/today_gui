@@ -2,6 +2,7 @@
 
 .app-list-of-lists-of-product {
     margin-top: -30px;
+    flex-direction: column;
 
     .button-plus {
         margin-bottom: 10px;
@@ -10,10 +11,10 @@
         transform: translateX(-50%);
     }
 
-    .ng-for-container {
+    .ng-for-container.list-of-list-of-product-container {
         flex-wrap: wrap;
         justify-content: space-between;
-        height: fit-content;
+        height: 220px;
 
         .ng-for {
             width: 43%;
@@ -42,6 +43,48 @@
                 }
             }
 
+        }
+    }
+
+    .recently-used-container {
+        height: 150px;
+        flex-direction: column;
+        padding-left: 10px;
+
+        .text {
+            color: $TODAY_COLOR_1;
+            font-weight: bold;
+        }
+
+        .ng-for-container {
+            height: fit-content;
+            overflow-x: scroll;
+            padding: 20px 0;
+
+            .ng-for {
+                margin-right: 10px;
+            }
+        }
+    }
+
+    .seasonal-product-container {
+        height: 150px;
+        flex-direction: column;
+        padding-left: 10px;
+
+        .text {
+            color: $TODAY_COLOR_1;
+            font-weight: bold;
+        }
+
+        .ng-for-container {
+            height: fit-content;
+            overflow-x: scroll;
+            padding: 20px 0;
+
+            .ng-for {
+                margin-right: 10px;
+            }
         }
     }
 

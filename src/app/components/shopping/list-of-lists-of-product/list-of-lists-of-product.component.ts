@@ -20,6 +20,7 @@ export class ListOfListsOfProductComponent implements OnInit {
     shoppingData$: Observable<any>;
 
     currentUser: UserI;
+    recentlyUsedProducts: ProductOfListI[];
 
     constructor(
         private readonly listOfProductService: ListOfProductService,
@@ -38,6 +39,7 @@ export class ListOfListsOfProductComponent implements OnInit {
         this.userStore.state$.subscribe((r) => {
             this.currentUser = r.user;
             this.initListOfProduct();
+            this.initRecentlyUser();
         });
     }
 
@@ -45,6 +47,14 @@ export class ListOfListsOfProductComponent implements OnInit {
         if (this.currentUser) {
             this.listOfProductService.getByUserId({ userId: this.currentUser.id }).subscribe((r) => {
                 this.shoppingDataStore.setListOfProduct({ listOfListOfProduct: r.body });
+            });
+        }
+    }
+
+    initRecentlyUser() {
+        if (this.currentUser) {
+            this.listOfProductService.getRecentlyUsedByUserId({ userId: this.currentUser.id }).subscribe((r) => {
+                this.recentlyUsedProducts = r.body;
             });
         }
     }

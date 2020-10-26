@@ -71,6 +71,29 @@ p {
     font-size: 24px;
 }
 
+.text-product-name-1 {
+    white-space: nowrap;
+    color: $TODAY_COLOR_5;
+    background-color: white;
+    border-radius: 100px;
+    box-shadow: 1px 1px 3px $TODAY_COLOR_5;
+    padding: 4px 10px;
+    max-width: 90px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}
+
+.text-product-name-1:hover {
+    background-color: $TODAY_COLOR_1;
+    color: white;
+}
+
+.text-product-name-1.selected {
+    background-color: $TODAY_COLOR_1;
+    color: white;
+}
+
 .border-top-right-radius {
     border-top-right-radius: 50px;
 }

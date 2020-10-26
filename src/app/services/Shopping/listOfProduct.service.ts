@@ -21,6 +21,12 @@ export class ListOfProductService {
         return this.http.get('list-of-product/by-user-id', body);
     }
 
+    public getRecentlyUsedByUserId(body: {
+        userId: string
+    }): Observable<any> {
+        return this.http.get('list-of-product/recently-used', body);
+    }
+
     public addProductToListOfProduct(body: {
         product: ProductI,
         listOfProductId: string,
