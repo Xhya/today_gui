@@ -62,6 +62,7 @@
     .background-div {
         background-color: $TODAY_COLOR_1;
         flex-direction: column;
+        height: calc(100% - 90px);
     }
 
     .search-container {
@@ -78,23 +79,10 @@
 
             input {
                 margin-right: 3%;
-                border-radius: 100px;
-                padding-left: 10px;
-                border: solid 1px $TODAY_COLOR_1;
-                text-transform: capitalize;
-                color: $TODAY_COLOR_1;
-                font-weight: bold;
             }
         }
 
-        .search-plus-button {
-            border-radius: 100%;
-            padding: 2px 9px;
-            height: fit-content;
-            background-color: $TODAY_COLOR_1;
-            color: white;
-            font-size: 24px;
-        }
+
 
         .relative-position-of-list-of-product {
             position: relative;
@@ -149,6 +137,9 @@
         background-color: white;
         flex-direction: column;
         padding-top: 10px;
+        height: 100%;
+        overflow: scroll;
+        padding-bottom: 60px;
 
         .product-of-list-container {
             height: fit-content;
@@ -184,13 +175,14 @@
                     .left {
 
                         .quantity {
-                            width: fit-content;
+                            width: 40%;
                             padding-right: 20px;
                             color: $TODAY_COLOR_4;
                         }
 
                         .name {
                             color: $TODAY_COLOR_5;
+                            width: 60%;
                         }
                     }
 
@@ -219,13 +211,47 @@
 
     }
 
-    .plus-button {
-        margin-bottom: 10px;
 
-        .rotated {
-            transform: rotate(45deg);
+    .buttons-container {
+        height: 60px;
+        background-color: white;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        bottom: 0;
+
+        .button-suggestion,
+        .button-finished {
+            height: fit-content;
+            bottom: 20px;
+            background-color: $TODAY_COLOR_6;
+            color: $TODAY_COLOR_5;
+            padding: 5px 0;
+            border-radius: 100px;
+            font-weight: bold;
+            width: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .button-suggestion {
+            margin-right: 10px;
+        }
+        
+        .button-finished {
+            margin-left: 10px;
+        }
+
+        .button-plus {
+    
+            .rotated {
+                transform: rotate(45deg);
+            }
         }
     }
+
+
 
     .app-category-of-product-selector {
         width: 80%;

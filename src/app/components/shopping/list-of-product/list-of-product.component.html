@@ -33,12 +33,13 @@
         >
             <div class="text-container">
                 <input 
+                    class="input-search-1"
                     type="text"
                     [(ngModel)]="searchedProductText"
                     (ngModelChange)="onChangeSearchedProductText()"
-                    placeholder="..."
+                    placeholder="Rechercher un produit"
                 />
-                <button (click)="onClickCreateProduct()" class="search-plus-button">+</button>
+                <button (click)="onClickCreateProduct()" class="button-plus-search-1">+</button>
             </div>
             <div *ngIf="foundProducts.length > 0" class="relative-position-of-list-of-product">
                 <div class="list-of-product-container">
@@ -160,16 +161,38 @@
 
         </div>
 
-    </div>
 
-    <button 
-        class="plus-button"
-        (click)="onClickPlusButton()"
-    >
-        <div [ngClass]="{'rotated': isSearchActive }">
-            +
+        <div class="buttons-container">
+
+            <button 
+                class="button-suggestion"
+                (click)="onClickSuggestions()"
+            >
+                <p>
+                    SUGGESTIONS
+                </p>
+            </button> 
+    
+            <button 
+                class="button-plus"
+                (click)="onClickPlusButton()"
+            >
+                <div [ngClass]="{'rotated': isSearchActive }">
+                    +
+                </div>
+            </button>
+    
+            <button 
+                class="button-finished"
+                (click)="onClickSuggestions()"
+            >
+                <p>
+                    TERMINE
+                </p>
+            </button> 
         </div>
-    </button>
+
+    </div>
 
     <app-upfront-modal 
         *ngIf="isCategoryModalOpen"

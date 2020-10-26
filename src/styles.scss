@@ -37,15 +37,12 @@ p {
     margin: 0;
 }
 
-.plus-button {
-    position: fixed;
-    bottom: 0;
+.button-plus {
     justify-content: center;
     width: -webkit-fit-content;
     width: -moz-fit-content;
     width: fit-content;
     left: 50%;
-    transform: translateX(-50%);
     background-color: #ffd478;
     border-radius: 100%;
     padding: 0 12px;

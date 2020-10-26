@@ -3,8 +3,11 @@
 .app-list-of-lists-of-product {
     margin-top: -30px;
 
-    .plus-button {
+    .button-plus {
         margin-bottom: 10px;
+        position: fixed;
+        bottom: 0;
+        transform: translateX(-50%);
     }
 
     .ng-for-container {
@@ -18,6 +21,7 @@
             background-color: $TODAY_COLOR_1;
             color: white;
             margin-top: 10px;
+            border-radius: 5px;
 
             &:nth-child(2n+1) {
                 margin-left: 20px;
@@ -32,6 +36,10 @@
                 justify-content: center;
                 text-align: center;
                 border-radius: 5px;
+
+                .name-undefined {
+                    opacity: 60%;
+                }
             }
 
         }

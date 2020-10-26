@@ -3,14 +3,15 @@
     <div class="ng-for-container">
         <div class="ng-for" *ngFor="let listOfProduct of (shoppingData$ | async).listOfListOfProduct">
             <div class="item" (click)="onClickListOfProduct(listOfProduct)">
-                {{ listOfProduct.name }}
+                <p *ngIf="listOfProduct.name">{{ listOfProduct.name }}</p>
+                <p *ngIf="!listOfProduct.name" class="name-undefined">A définir</p>
             </div>
         </div> 
         
     </div>
 
     <button 
-        class="plus-button"
+        class="button-plus"
         (click)="onClickCreateListOfProduct()"
     >
         +
