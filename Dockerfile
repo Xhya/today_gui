@@ -1,17 +1,19 @@
-FROM node:10.18-slim
+FROM node:10-alpine as builder
 
-# Copy the file from your host to your current location.
-COPY angular.json .
-COPY package.json .
-COPY src ./src
-COPY tsconfig.json .
-COPY tslint.json .
+COPY package.json package-lock.json ./
 
-# Add metadata to the image to describe which port the container is listening on at runtime.
-EXPOSE 8080
+RUN npm install && mkdir /ng-app && mv ./node_modules ./ng-app
 
-RUN npm install 
-RUN ng update @angular/cli --migrate-only --from=1.6.7
+WORKDIR /ng-app
 
-# Run the specified command within the container.
-CMD [ "npm", "start" ]
+COPY . .
+
+RUN npm run build --prod
+
+EXPOSE 4200
+
+FROM nginx:1.15.8-alpine
+COPY --from=builder /ng-app/build/app /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
+
