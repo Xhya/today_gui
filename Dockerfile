@@ -8,15 +8,12 @@ WORKDIR /ng-app
 
 COPY . .
 
-CMD ["npm", "start"]
+RUN npm run build --prod
 
+EXPOSE 4200
 
-# RUN npm run build --prod
-
-# EXPOSE 4200
-
-# FROM nginx:1.15.8-alpine
-# COPY --from=builder /ng-app/build/app /usr/share/nginx/html
-# EXPOSE 80
-# CMD ["nginx", "-g", "daemon off;"]
+FROM nginx:1.15.8-alpine
+COPY --from=builder /ng-app/build/app /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
 
