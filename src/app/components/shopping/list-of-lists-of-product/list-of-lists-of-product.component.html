@@ -9,7 +9,7 @@
         </div> 
     </div>
 
-    <div class="recently-used-container">
+    <div *ngIf="recentlyUsedProducts.length > 0" class="recently-used-container">
         <p class="text">Utilisés recemment</p>
         <div class="ng-for-container">
             <div class="ng-for" *ngFor="let product of recentlyUsedProducts">

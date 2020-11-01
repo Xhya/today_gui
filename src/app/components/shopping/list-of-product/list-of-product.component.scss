@@ -100,9 +100,13 @@
                 overflow-x: scroll;
             }
 
-            .product-container {
-                height: fit-content;
-                padding: 10px;
+            .ng-for {
+                width: fit-content;
+                
+                .product-container {
+                    height: fit-content;
+                    padding: 10px;
+                }
             }
 
         }
