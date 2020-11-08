@@ -7,7 +7,7 @@ import { HTTPRestService } from './rest.http.service';
     providedIn: 'root',
 })
 export abstract class RestService extends HTTPRestService {
-    static API_ROOT: string = environment.baseUrl;
+    static API_ROOT: string = environment.serverUrl;
     private static DEFAULT_HEADERS = {
         Accept: 'application/json',
         'Content-Type': 'application/json',
